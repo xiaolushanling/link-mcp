@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<evaluation>
+  <qa_pair>
+    <question>查询国际物流和尾派制单的打印接口定义。对于转单标签，两者的 type 分别是多少？按“国际物流,尾派”返回两个数字。</question>
+    <answer>100,10</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>批量查询国际物流轨迹，再按运单获取该服务打印文件。分别查看两个接口的数组和打印份数上限，按“单号数量上限,份数上限”返回。</question>
+    <answer>30,10</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>尾派业务先进行运费试算，再按试算结果下单。查看两个接口的请求及响应定义，找出将两步关联的字段名，只返回该字段。</question>
+    <answer>calPriceId</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>比较国际物流的快递下单与专线下单。两者都必填的包裹容器分别叫什么？只返回“快递字段,专线字段”。</question>
+    <answer>pieces,boxes</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>需要按客户单号撤销业务。比较国际物流删除订单与尾派取消运单的请求体：前者用于单号的必填字段与后者用于客户单号的必填字段分别是什么？返回“前者,后者”。</question>
+    <answer>no,customerNo</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>将设备数据传给国际物流，并使用综合服务推送业务事件。对比 DWS 上传数据和综合推送两个接口的请求头，找出只有推送接口要求的那个头名。只返回字段名。</question>
+    <answer>event</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>核对尾派下单与尾派运费试算的单件明细。两个接口共同要求的尺寸和重量字段有哪些？按字段名字母升序，用英文逗号连接返回。</question>
+    <answer>height,length,weight,width</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>比较基础数据的地址验证与偏远验证。地址验证在 countryCode 之外额外要求哪个字段，而偏远验证没有该必填项？只返回字段名。</question>
+    <answer>address1</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>比较结算服务的查询可用产品、查询余额和查价。哪个字段只在查询可用产品中是额外必填，用于指定 LMS、PDS 或 OWMS？只返回字段名。</question>
+    <answer>businessSysCode</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>查看用户服务第三方登录的响应定义，并与结算余额查询的响应比较。第三方登录 data 中提供浏览器跳转目标的字段名是什么？只返回字段名。</question>
+    <answer>redirectUrl</answer>
+  </qa_pair>
+</evaluation>

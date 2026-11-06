@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "link-mcp"
+version = "0.1.0"
+description = "链路 ERP 开放平台 MCP 服务"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=2.3,<3",
+    "httpx>=0.28,<1",
+    "jsonschema>=4.23,<5",
+    "pydantic>=2.12,<3",
+    "python-dotenv>=1.2,<2",
+    "uvicorn>=0.31,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.14,<1", "build>=1,<2"]
+
+[project.scripts]
+link-mcp = "link_mcp.__main__:main"
+link-mcp-sync = "link_mcp.sync:main"
+
+[project.urls]
+Repository = "https://github.com/xiaolushanling/link-mcp"
+Documentation = "https://github.com/xiaolushanling/link-mcp#readme"
+Issues = "https://github.com/xiaolushanling/link-mcp/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+link_mcp = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

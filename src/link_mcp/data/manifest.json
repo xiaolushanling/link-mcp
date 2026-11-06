@@ -1,0 +1,49 @@
+{
+  "source_url": "https://demo.linkl.com.cn/doc/index.html",
+  "api_base_url": "https://demo.linkl.com.cn/api",
+  "snapshot_date": "2026-11-06",
+  "services": [
+    {
+      "id": "user",
+      "name": "用户服务",
+      "context_path": "/userservice",
+      "document_url": "https://demo.linkl.com.cn/api/userservice/v3/api-docs/open-api",
+      "file": "user.json"
+    },
+    {
+      "id": "lms",
+      "name": "国际物流",
+      "context_path": "/lmsservice",
+      "document_url": "https://demo.linkl.com.cn/api/lmsservice/v3/api-docs/open-api",
+      "file": "lms.json"
+    },
+    {
+      "id": "pds",
+      "name": "尾派制单",
+      "context_path": "/pdsservice",
+      "document_url": "https://demo.linkl.com.cn/api/pdsservice/v3/api-docs/open-api",
+      "file": "pds.json"
+    },
+    {
+      "id": "finance",
+      "name": "结算服务",
+      "context_path": "/financeservice",
+      "document_url": "https://demo.linkl.com.cn/api/financeservice/v3/api-docs/open-api",
+      "file": "finance.json"
+    },
+    {
+      "id": "edge",
+      "name": "综合服务",
+      "context_path": "/edgeservice",
+      "document_url": "https://demo.linkl.com.cn/api/edgeservice/v3/api-docs/open-api",
+      "file": "edge.json"
+    },
+    {
+      "id": "basicdata",
+      "name": "基础数据",
+      "context_path": "/basicdataservice",
+      "document_url": "https://demo.linkl.com.cn/api/basicdataservice/v3/api-docs/open-api",
+      "file": "basicdata.json"
+    }
+  ]
+}

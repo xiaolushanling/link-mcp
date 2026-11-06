@@ -1,0 +1,387 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "链路ERP开放平台",
+    "description": "basicdataservice",
+    "contact": {
+      "name": "link",
+      "url": "https://www.linkl.com.cn"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.linkl.com.cn"
+    }
+  ],
+  "paths": {
+    "/openapi/validateRemote": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "偏远验证",
+        "operationId": "validateRemote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLBRO_OpenApiValidateRemoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLBRO_OpenApiValidateRemoteResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 2
+      }
+    },
+    "/openapi/validateAddress": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "地址验证",
+        "operationId": "validateAddress",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLBRO_OpenApiValidateAddressRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLBRO_OpenApiValidateAddressResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 1
+      }
+    },
+    "/openapi/cityPostCodeSearch": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "城市邮编查询",
+        "operationId": "cityPostCodeSearch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLBRO_OpenApiCityPostCodeSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLBRO_OpenApiCityPostCodeSearchResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 3
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CLBRO_OpenApiValidateRemoteRequest": {
+        "required": [
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码(长度:[2])",
+            "example": "US"
+          },
+          "city": {
+            "type": "string",
+            "description": "市(长度:[80])"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编(长度:[20])"
+          }
+        }
+      },
+      "CLBRO_OpenApiValidateRemoteResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "description": "偏远类型 1:DHL 2:FEDEX 3:UPS 4:TNT 5:UPS专线 6:FEDEX专线",
+            "format": "int32"
+          },
+          "level": {
+            "type": "string",
+            "description": "偏远等级"
+          }
+        },
+        "description": "数据结果"
+      },
+      "CLCMRULLBRO_OpenApiValidateRemoteResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据结果",
+            "items": {
+              "$ref": "#/components/schemas/CLBRO_OpenApiValidateRemoteResponse"
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLBRO_OpenApiValidateAddressRequest": {
+        "required": [
+          "address1",
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码(长度:[2])",
+            "example": "US"
+          },
+          "state": {
+            "type": "string",
+            "description": "省(长度:[100])",
+            "example": "CA"
+          },
+          "city": {
+            "type": "string",
+            "description": "市(长度:[80])"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编(长度:[20])"
+          },
+          "address1": {
+            "type": "string",
+            "description": "地址1(长度:[255])"
+          },
+          "address2": {
+            "type": "string",
+            "description": "地址2(长度:[255])"
+          },
+          "address3": {
+            "type": "string",
+            "description": "地址3(长度:[255])"
+          }
+        }
+      },
+      "CLBRO_OpenApiValidateAddressResponse": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码",
+            "example": "US"
+          },
+          "state": {
+            "type": "string",
+            "description": "省",
+            "example": "CA"
+          },
+          "city": {
+            "type": "string",
+            "description": "市"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编"
+          },
+          "address1": {
+            "type": "string",
+            "description": "地址1"
+          },
+          "address2": {
+            "type": "string",
+            "description": "地址2"
+          },
+          "address3": {
+            "type": "string",
+            "description": "地址3"
+          },
+          "validateType": {
+            "type": "integer",
+            "description": "验证类型 0:FEDEX 1:UPS",
+            "format": "int32",
+            "example": 0
+          },
+          "addressType": {
+            "type": "integer",
+            "description": "地址类型(1:商业 2:住宅 3:混合 4:未知 5:FBA)",
+            "format": "int32"
+          },
+          "remoteLevel": {
+            "type": "string",
+            "description": "偏远等级"
+          }
+        },
+        "description": "数据结果"
+      },
+      "CLCMRULLBRO_OpenApiValidateAddressResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据结果",
+            "items": {
+              "$ref": "#/components/schemas/CLBRO_OpenApiValidateAddressResponse"
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLBRO_OpenApiCityPostCodeSearchRequest": {
+        "required": [
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码(长度:[2])"
+          },
+          "city": {
+            "type": "string",
+            "description": "市(长度:[80])"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编(长度:[20])"
+          }
+        }
+      },
+      "CLBRO_OpenApiCityPostCodeSearchResponse": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码"
+          },
+          "state": {
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "type": "string",
+            "description": "市"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编"
+          },
+          "remoteResults": {
+            "type": "array",
+            "description": "偏远信息",
+            "items": {
+              "$ref": "#/components/schemas/CLBRO_OpenApiValidateRemoteResponse"
+            }
+          }
+        },
+        "description": "数据结果"
+      },
+      "CLCMRULLBRO_OpenApiCityPostCodeSearchResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据结果",
+            "items": {
+              "$ref": "#/components/schemas/CLBRO_OpenApiCityPostCodeSearchResponse"
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      }
+    }
+  },
+  "x-openapi": {
+    "x-setting": {
+      "customCode": 200,
+      "language": "zh-CN",
+      "enableSwaggerModels": false,
+      "swaggerModelName": "Swagger Models",
+      "enableReloadCacheParameter": false,
+      "enableAfterScript": true,
+      "enableDocumentManage": false,
+      "enableVersion": false,
+      "enableRequestCache": true,
+      "enableFilterMultipartApis": false,
+      "enableFilterMultipartApiMethodType": "POST",
+      "enableHost": false,
+      "enableHostText": "",
+      "enableDynamicParameter": false,
+      "enableDebug": false,
+      "enableFooter": true,
+      "enableFooterCustom": false,
+      "enableSearch": true,
+      "enableOpenApi": true,
+      "enableHomeCustom": false,
+      "enableGroup": true,
+      "enableResponseCode": true
+    },
+    "x-markdownFiles": []
+  }
+}

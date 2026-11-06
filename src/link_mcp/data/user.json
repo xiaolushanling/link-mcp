@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "链路ERP开放平台",
+    "description": "userservice",
+    "contact": {
+      "name": "link",
+      "url": "https://www.linkl.com.cn"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.linkl.com.cn"
+    }
+  ],
+  "paths": {
+    "/openapi/oauthLogin": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "oauth登录",
+        "description": "仅用于第三方登录",
+        "operationId": "oauthLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLURO_OpenApiOauthLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRLURO_OpenApiOauthLoginResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 1
+      }
+    },
+    "/openapi/getReceiveWarehouse": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "获取收货仓库",
+        "operationId": "getReceiveWarehouse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLURO_OpenApiReceiveWarehouseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLURO_OpenApiWarehouseResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 2
+      }
+    },
+    "/openapi/getOwmsWarehouse": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "获取海外仓仓库",
+        "operationId": "getOwmsWarehouse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLURO_OpenApiOwmsWarehouseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLURO_OpenApiWarehouseResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 3
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CLURO_OpenApiOauthLoginRequest": {
+        "required": [
+          "password",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          }
+        },
+        "description": "oauth登录Request"
+      },
+      "CLCMRLURO_OpenApiOauthLoginResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CLURO_OpenApiOauthLoginResponse"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLURO_OpenApiOauthLoginResponse": {
+        "type": "object",
+        "properties": {
+          "redirectUrl": {
+            "type": "string",
+            "description": "重定向地址"
+          }
+        },
+        "description": "sso登录"
+      },
+      "CLURO_OpenApiReceiveWarehouseRequest": {
+        "type": "object",
+        "description": "收件仓库Request"
+      },
+      "CLCMRULLURO_OpenApiWarehouseResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据结果",
+            "items": {
+              "$ref": "#/components/schemas/CLURO_OpenApiWarehouseResponse"
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLURO_OpenApiWarehouseResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "仓库代码"
+          },
+          "name": {
+            "type": "string",
+            "description": "仓库名称"
+          },
+          "phone": {
+            "type": "string",
+            "description": "电话"
+          },
+          "address": {
+            "type": "string",
+            "description": "地址"
+          },
+          "contactName": {
+            "type": "string",
+            "description": "联系人"
+          }
+        },
+        "description": "仓库Response"
+      },
+      "CLURO_OpenApiOwmsWarehouseRequest": {
+        "type": "object",
+        "description": "海外仓仓库Request"
+      }
+    }
+  },
+  "x-openapi": {
+    "x-setting": {
+      "customCode": 200,
+      "language": "zh-CN",
+      "enableSwaggerModels": false,
+      "swaggerModelName": "Swagger Models",
+      "enableReloadCacheParameter": false,
+      "enableAfterScript": true,
+      "enableDocumentManage": false,
+      "enableVersion": false,
+      "enableRequestCache": true,
+      "enableFilterMultipartApis": false,
+      "enableFilterMultipartApiMethodType": "POST",
+      "enableHost": false,
+      "enableHostText": "",
+      "enableDynamicParameter": false,
+      "enableDebug": false,
+      "enableFooter": true,
+      "enableFooterCustom": false,
+      "enableSearch": true,
+      "enableOpenApi": true,
+      "enableHomeCustom": false,
+      "enableGroup": true,
+      "enableResponseCode": true
+    },
+    "x-markdownFiles": []
+  }
+}

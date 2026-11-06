@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "link-mcp": {
+      "type": "stdio",
+      "command": "D:/pythonProjects/link-mcp/.venv/Scripts/python.exe",
+      "args": ["D:/pythonProjects/link-mcp/server.py"],
+      "env": {
+        "LINK_API_BASE_URL": "https://demo.linkl.com.cn/api",
+        "LINK_TOKEN": "YOUR_LINK_TOKEN",
+        "LINK_CUSTOMER_KEY": "YOUR_CUSTOMER_KEY"
+      }
+    }
+  }
+}

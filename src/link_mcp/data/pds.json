@@ -1,0 +1,1545 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "链路ERP开放平台",
+    "description": "pdsservice",
+    "contact": {
+      "name": "link",
+      "url": "https://www.linkl.com.cn"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.linkl.com.cn"
+    }
+  ],
+  "paths": {
+    "/openapi/print": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "打印文件",
+        "operationId": "print",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiPrintRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRLPRO_OpenApiPrintResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 4
+      }
+    },
+    "/openapi/order": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "下单",
+        "operationId": "order",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRLPRO_OpenApiOrderResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 3
+      }
+    },
+    "/openapi/orderDetail": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "运单详情",
+        "operationId": "orderDetail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRLPRO_OpenApiOrderDetailResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 5
+      }
+    },
+    "/openapi/orderByCalPrice": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "根据试算id下单",
+        "operationId": "orderByCalPrice",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiOrderByCalPriceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRLPRO_OpenApiOrderResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 2
+      }
+    },
+    "/openapi/cancel": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "取消运单",
+        "operationId": "cancel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiCancelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCM_Result"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 6
+      }
+    },
+    "/openapi/calPrice": {
+      "post": {
+        "tags": [
+          "API列表"
+        ],
+        "summary": "运费试算",
+        "operationId": "calPrice",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CLPRO_OpenApiCalPriceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CLCMRULLPRO_OpenApiCalPriceResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-order": 1
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CLPRO_OpenApiPrintRequest": {
+        "required": [
+          "no",
+          "noType",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "description": "文件类型(10:转单标签,20:转单发票,30:备份联)",
+            "format": "int32"
+          },
+          "no": {
+            "type": "string",
+            "description": "单号"
+          },
+          "noType": {
+            "type": "integer",
+            "description": "单号类型(0:运单号 1:客户单号 2:转单号)",
+            "format": "int32"
+          },
+          "copyCount": {
+            "maximum": 10,
+            "type": "integer",
+            "description": "份数",
+            "format": "int32"
+          }
+        }
+      },
+      "CLCMRLPRO_OpenApiPrintResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiPrintResponse"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLPRO_OpenApiPrintResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "url"
+          }
+        },
+        "description": "打印response"
+      },
+      "CLPRO_OpenApiCommodityRequest": {
+        "type": "object",
+        "properties": {
+          "nameCn": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "中文品名"
+          },
+          "nameEn": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "英文品名"
+          },
+          "unitNetWeight": {
+            "type": "number",
+            "description": "单品名净重"
+          },
+          "sku": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "SKU"
+          },
+          "purposeCn": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "中文用途"
+          },
+          "purposeEn": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "英文用途"
+          },
+          "materialCn": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "中文材质"
+          },
+          "materialEn": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "英文材质"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "数量",
+            "format": "int32"
+          },
+          "unit": {
+            "type": "integer",
+            "description": "单位(非必填，默认值0:PCS)",
+            "format": "int32"
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "单价"
+          },
+          "brand": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "品牌"
+          },
+          "norms": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "规格"
+          },
+          "hsCode": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "海关编码"
+          },
+          "origin": {
+            "type": "string",
+            "description": "原产地"
+          },
+          "link": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "链接"
+          },
+          "declareElement": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "申报要素"
+          },
+          "model": {
+            "type": "string",
+            "description": "型号(长度:[255])"
+          }
+        },
+        "description": "商品信息"
+      },
+      "CLPRO_OpenApiDocumentOptionRequest": {
+        "type": "object",
+        "properties": {
+          "requiredLabel": {
+            "type": "integer",
+            "description": "是否需要label(0:否 1:是(默认))",
+            "format": "int32"
+          },
+          "requiredInvoice": {
+            "type": "integer",
+            "description": "是否需要发票(0:不需要(默认) 1:需要)",
+            "format": "int32"
+          },
+          "requiredCopy": {
+            "type": "integer",
+            "description": "是否需要copy联(0:不需要(默认) 1:需要，仅UPS适用)",
+            "format": "int32"
+          }
+        },
+        "description": "文档属性"
+      },
+      "CLPRO_OpenApiOrderRequest": {
+        "required": [
+          "customerKey",
+          "customerNo",
+          "info",
+          "pieces",
+          "recipient"
+        ],
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "type": "string",
+            "description": "customerKey，请联系客服提供，保密使用，谨防泄漏"
+          },
+          "customerNo": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "客户单号",
+            "example": "TEST000000001"
+          },
+          "labelDesc": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "制单描述"
+          },
+          "declareValue": {
+            "type": "number",
+            "description": "申报价值"
+          },
+          "declareCurrency": {
+            "type": "string",
+            "description": "申报币种(长度:[3])"
+          },
+          "declareFreightFee": {
+            "type": "number",
+            "description": "申报运费"
+          },
+          "declareOtherFee": {
+            "type": "number",
+            "description": "申报其他费用"
+          },
+          "declareHandlingFee": {
+            "type": "number",
+            "description": "申报手续费用"
+          },
+          "declareInsuranceFee": {
+            "type": "number",
+            "description": "申报保险费用"
+          },
+          "info": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest"
+          },
+          "pieces": {
+            "type": "array",
+            "description": "单件信息",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiPieceRequest"
+            }
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiRecipientRequest"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiSenderRequest"
+          },
+          "documentOption": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiDocumentOptionRequest"
+          }
+        },
+        "description": "下单Request"
+      },
+      "CLPRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest": {
+        "required": [
+          "productCode"
+        ],
+        "type": "object",
+        "properties": {
+          "productCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "产品编码"
+          },
+          "weightUnit": {
+            "type": "integer",
+            "description": "重量单位(0:CM/KG(默认) 1:IN/LBS)",
+            "format": "int32"
+          },
+          "packageType": {
+            "type": "integer",
+            "description": "包裹类型(0:包裹(WPX)(默认) 1:文件(DOC) 2:包裹袋(PAK))",
+            "format": "int32"
+          },
+          "needInsure": {
+            "type": "integer",
+            "description": "是否需要保险 0:否(默认) 1:是",
+            "format": "int32"
+          },
+          "signatureType": {
+            "type": "integer",
+            "description": "签名服务类型(0:无需签名(默认) 1:普通签名  2成人签名)",
+            "format": "int32"
+          }
+        },
+        "description": "运单信息"
+      },
+      "CLPRO_OpenApiPieceRequest": {
+        "required": [
+          "height",
+          "length",
+          "weight",
+          "width"
+        ],
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "number",
+            "description": "实重"
+          },
+          "length": {
+            "type": "number",
+            "description": "长度"
+          },
+          "width": {
+            "type": "number",
+            "description": "宽度"
+          },
+          "height": {
+            "type": "number",
+            "description": "高度"
+          },
+          "fbaShipmentId": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "FBA货件ID(FBA shipmentId)"
+          },
+          "fbaReferenceId": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "FBA内部参考ID(FBA Amazon Reference ID)"
+          },
+          "boxNo": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "箱号(客户自定义)"
+          },
+          "purchaseOrderNumber": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "PO预约号"
+          },
+          "commodities": {
+            "type": "array",
+            "description": "商品信息",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiCommodityRequest"
+            }
+          }
+        },
+        "description": "单件信息"
+      },
+      "CLPRO_OpenApiRecipientRequest": {
+        "required": [
+          "address1",
+          "city",
+          "company",
+          "countryCode",
+          "name",
+          "phone",
+          "postcode"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "姓名"
+          },
+          "company": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "公司"
+          },
+          "phone": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "电话"
+          },
+          "email": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "邮箱"
+          },
+          "countryCode": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "国家代码"
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "市"
+          },
+          "postcode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "邮编"
+          },
+          "address1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址1"
+          },
+          "address2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址2"
+          },
+          "address3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址3"
+          },
+          "suburb": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "郊区"
+          },
+          "houseNumber": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "门牌号"
+          },
+          "partyType": {
+            "type": "integer",
+            "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
+            "format": "int32"
+          },
+          "cardType": {
+            "type": "integer",
+            "description": "证件类型 1:身份证 2:护照",
+            "format": "int32"
+          },
+          "cardNo": {
+            "type": "string",
+            "description": "证件号码"
+          }
+        },
+        "description": "收件人"
+      },
+      "CLPRO_OpenApiSenderRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "姓名"
+          },
+          "company": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "公司"
+          },
+          "phone": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "电话"
+          },
+          "email": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "邮箱"
+          },
+          "countryCode": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "国家代码"
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "市"
+          },
+          "postcode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "邮编"
+          },
+          "address1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址1"
+          },
+          "address2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址2"
+          },
+          "address3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址3"
+          },
+          "suburb": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "郊区"
+          },
+          "partyType": {
+            "type": "integer",
+            "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
+            "format": "int32"
+          }
+        },
+        "description": "寄件人"
+      },
+      "CLCMRLPRO_OpenApiOrderResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderResponse"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLPRO_OpenApiOrderDetailResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "运单id",
+            "format": "int64"
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "客户单号"
+          },
+          "trackNo": {
+            "type": "string",
+            "description": "转单号"
+          },
+          "waybillNo": {
+            "type": "string",
+            "description": "运单号"
+          },
+          "orderTime": {
+            "type": "integer",
+            "description": "下单时间(时间戳)",
+            "format": "int64"
+          },
+          "status": {
+            "type": "integer",
+            "description": "状态",
+            "format": "int32"
+          },
+          "fetchNoStatus": {
+            "type": "integer",
+            "description": "制单状态(0:未制单 1:制单中 2:成功)",
+            "format": "int32"
+          },
+          "productName": {
+            "type": "string",
+            "description": "产品(长度:[255])"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "产品代码(长度:[255])"
+          },
+          "weightUnit": {
+            "type": "integer",
+            "description": "计费单位(0:CM/KG(默认) 1:IN/LBS)",
+            "format": "int32"
+          },
+          "pieceCount": {
+            "type": "integer",
+            "description": "件数",
+            "format": "int32"
+          },
+          "actualWeight": {
+            "type": "number",
+            "description": "实重"
+          },
+          "volumeWeight": {
+            "type": "number",
+            "description": "材积重"
+          },
+          "chargeWeight": {
+            "type": "number",
+            "description": "计费重"
+          },
+          "packageType": {
+            "type": "integer",
+            "description": "包裹类型(0:包裹(WPX) 1:文件(DOC) 2:包裹袋(PAK))",
+            "format": "int32"
+          },
+          "carrierSortCode": {
+            "type": "string",
+            "description": "承运商分拣码"
+          },
+          "declareValue": {
+            "type": "number",
+            "description": "申报价值"
+          },
+          "declareCurrency": {
+            "type": "string",
+            "description": "申报币种"
+          },
+          "declareFreightFee": {
+            "type": "number",
+            "description": "申报运费"
+          },
+          "declareOtherFee": {
+            "type": "number",
+            "description": "申报其他费用"
+          },
+          "declareHandlingFee": {
+            "type": "number",
+            "description": "申报手续费"
+          },
+          "declareInsuranceFee": {
+            "type": "number",
+            "description": "申报保险费用"
+          },
+          "declareTotalValue": {
+            "type": "number",
+            "description": "申报总金额"
+          },
+          "pieces": {
+            "type": "array",
+            "description": "子单信息",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse$OpenApiPieceResponse"
+            }
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse$OpenApiRecipientResponse"
+          },
+          "fees": {
+            "type": "array",
+            "description": "费用信息",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse$OpenApiFeeResponse"
+            }
+          }
+        },
+        "description": "运单"
+      },
+      "CLPRO_OpenApiOrderDetailResponse$OpenApiFeeResponse": {
+        "type": "object",
+        "properties": {
+          "subjectName": {
+            "type": "string",
+            "description": "科目名称"
+          },
+          "subjectCode": {
+            "type": "string",
+            "description": "科目代码"
+          },
+          "value": {
+            "type": "number",
+            "description": "原币金额"
+          },
+          "currency": {
+            "type": "string",
+            "description": "币种"
+          },
+          "conversionValue": {
+            "type": "number",
+            "description": "维护本币金额"
+          },
+          "formula": {
+            "type": "string",
+            "description": "公式"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        },
+        "description": "费用"
+      },
+      "CLPRO_OpenApiOrderDetailResponse$OpenApiPieceResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "子单id",
+            "format": "int64"
+          },
+          "subNo": {
+            "type": "string",
+            "description": "子单号"
+          },
+          "trackNo": {
+            "type": "string",
+            "description": "子转单号"
+          },
+          "boxNo": {
+            "type": "string",
+            "description": "箱号(客户自定义)"
+          },
+          "weight": {
+            "type": "number",
+            "description": "实重"
+          },
+          "length": {
+            "type": "number",
+            "description": "长度"
+          },
+          "width": {
+            "type": "number",
+            "description": "宽度"
+          },
+          "height": {
+            "type": "number",
+            "description": "高度"
+          }
+        },
+        "description": "单件明细"
+      },
+      "CLPRO_OpenApiOrderDetailResponse$OpenApiRecipientResponse": {
+        "required": [
+          "address1",
+          "countryCode"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "姓名(长度:[50])"
+          },
+          "company": {
+            "type": "string",
+            "description": "公司(长度:[100])"
+          },
+          "phone": {
+            "type": "string",
+            "description": "电话(长度:[100])"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱(长度:[100])"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "国家代码(长度:[5])"
+          },
+          "state": {
+            "type": "string",
+            "description": "省(长度:[100])"
+          },
+          "city": {
+            "type": "string",
+            "description": "市(长度:[80])"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "邮编(长度:[20])"
+          },
+          "address1": {
+            "type": "string",
+            "description": "地址1(长度:[255])"
+          },
+          "address2": {
+            "type": "string",
+            "description": "地址2(长度:[255])"
+          },
+          "address3": {
+            "type": "string",
+            "description": "地址3(长度:[255])"
+          },
+          "suburb": {
+            "type": "string",
+            "description": "郊区"
+          },
+          "fbaWarehouseCode": {
+            "type": "string",
+            "description": "FBA仓库代码"
+          },
+          "remoteLevel": {
+            "type": "string",
+            "description": "偏远等级"
+          },
+          "addressType": {
+            "type": "integer",
+            "description": "地址类型(1:商业 2:住宅 3:混合 4:未知 5:FBA)",
+            "format": "int32"
+          }
+        },
+        "description": "收件人"
+      },
+      "CLPRO_OpenApiOrderResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "运单id",
+            "format": "int64"
+          },
+          "waybillNo": {
+            "type": "string",
+            "description": "运单号"
+          },
+          "trackNo": {
+            "type": "string",
+            "description": "转单号"
+          },
+          "labelUrl": {
+            "type": "string",
+            "description": "转单面单(链接有效期5分钟)"
+          },
+          "invoiceUrl": {
+            "type": "string",
+            "description": "发票(链接有效期5分钟)"
+          },
+          "copyUrl": {
+            "type": "string",
+            "description": "copy联(仅ups有效，链接有效期5分钟)"
+          },
+          "info": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse"
+          }
+        },
+        "description": "下单response"
+      },
+      "CLPRO_OpenApiOrderDetailRequest": {
+        "required": [
+          "no"
+        ],
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "type": "string",
+            "description": "customerKey，请联系客服提供，保密使用，谨防泄漏"
+          },
+          "no": {
+            "type": "string",
+            "description": "单号"
+          },
+          "noType": {
+            "type": "integer",
+            "description": "单号类型(0:运单号 1:客户单号 2:转单号)",
+            "format": "int32"
+          }
+        },
+        "description": "订单详情Request"
+      },
+      "CLCMRLPRO_OpenApiOrderDetailResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLPRO_OpenApiOrderByCalPriceRequest": {
+        "required": [
+          "calPriceId",
+          "customerKey",
+          "customerNo"
+        ],
+        "type": "object",
+        "properties": {
+          "calPriceId": {
+            "type": "string",
+            "description": "运费试算id"
+          },
+          "customerKey": {
+            "type": "string",
+            "description": "customerKey，请联系客服提供，保密使用，谨防泄漏"
+          },
+          "customerNo": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "客户单号",
+            "example": "TEST000000001"
+          },
+          "labelDesc": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "制单描述"
+          },
+          "declareValue": {
+            "type": "number",
+            "description": "申报价值"
+          },
+          "declareCurrency": {
+            "type": "string",
+            "description": "申报币种(长度:[3])"
+          },
+          "declareFreightFee": {
+            "type": "number",
+            "description": "申报运费"
+          },
+          "declareOtherFee": {
+            "type": "number",
+            "description": "申报其他费用"
+          },
+          "declareHandlingFee": {
+            "type": "number",
+            "description": "申报手续费用"
+          },
+          "declareInsuranceFee": {
+            "type": "number",
+            "description": "申报保险费用"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiOrderByCalPriceRequest$OpenApiSenderRequest"
+          },
+          "documentOption": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiDocumentOptionRequest"
+          }
+        },
+        "description": "下单Request"
+      },
+      "CLPRO_OpenApiOrderByCalPriceRequest$OpenApiSenderRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "姓名"
+          },
+          "company": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "公司"
+          },
+          "phone": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "电话"
+          },
+          "email": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "邮箱"
+          },
+          "countryCode": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "国家代码"
+          },
+          "state": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "maxLength": 80,
+            "type": "string",
+            "description": "市"
+          },
+          "postcode": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "邮编"
+          },
+          "address1": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址1"
+          },
+          "address2": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址2"
+          },
+          "address3": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "地址3"
+          },
+          "suburb": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "郊区"
+          },
+          "partyType": {
+            "type": "integer",
+            "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
+            "format": "int32"
+          }
+        },
+        "description": "寄件人"
+      },
+      "CLPRO_OpenApiCancelRequest": {
+        "required": [
+          "customerKey",
+          "customerNo"
+        ],
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "type": "string",
+            "description": "customerKey，请联系客服提供，保密使用，谨防泄漏"
+          },
+          "customerNo": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "客户单号"
+          }
+        }
+      },
+      "CLCM_Result": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "object",
+            "description": "数据结果"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLPRO_OpenApiCalPriceRequest": {
+        "required": [
+          "customerKey",
+          "info",
+          "pieces",
+          "recipient"
+        ],
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "type": "string",
+            "description": "customerKey，请联系客服提供，保密使用，谨防泄漏"
+          },
+          "info": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiCalPriceRequest$OpenApiWaybillInfoRequest"
+          },
+          "pieces": {
+            "type": "array",
+            "description": "单件信息",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiPieceRequest"
+            }
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiRecipientRequest"
+          }
+        },
+        "description": "运费试算Request"
+      },
+      "CLPRO_OpenApiCalPriceRequest$OpenApiWaybillInfoRequest": {
+        "type": "object",
+        "properties": {
+          "productCode": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "产品编码"
+          },
+          "weightUnit": {
+            "type": "integer",
+            "description": "重量单位(0:CM/KG(默认) 1:IN/LBS)",
+            "format": "int32"
+          },
+          "packageType": {
+            "type": "integer",
+            "description": "包裹类型(0:包裹(WPX)(默认) 1:文件(DOC) 2:包裹袋(PAK))",
+            "format": "int32"
+          },
+          "needInsure": {
+            "type": "integer",
+            "description": "是否需要保险 0:否(默认) 1:是",
+            "format": "int32"
+          },
+          "signatureType": {
+            "type": "integer",
+            "description": "签名服务类型(0:无需签名(默认) 1:普通签名  2成人签名)",
+            "format": "int32"
+          }
+        },
+        "description": "运单信息"
+      },
+      "CLCM_TypeRemark": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "description": "类型",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        },
+        "description": "类型备注"
+      },
+      "CLCMRLPRO_OpenApiQueryPriceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiQueryPriceResponse"
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLCMRULLPRO_OpenApiCalPriceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "返回码(0:成功 其他:失败)，业务code需大于1000",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据结果",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiCalPriceResponse"
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "错误消息"
+          }
+        },
+        "description": "Result"
+      },
+      "CLPRO_OpenApiCalPriceResponse": {
+        "type": "object",
+        "properties": {
+          "calPriceId": {
+            "type": "string",
+            "description": "查价id"
+          },
+          "productName": {
+            "type": "string",
+            "description": "产品名称"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "产品代码"
+          },
+          "calPriceResult": {
+            "$ref": "#/components/schemas/CLCMRLPRO_OpenApiQueryPriceResponse"
+          }
+        },
+        "description": "运费试算Response"
+      },
+      "CLPRO_OpenApiQueryPriceResponse": {
+        "type": "object",
+        "properties": {
+          "productName": {
+            "type": "string",
+            "description": "渠道名称"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "渠道代码"
+          },
+          "productCategory": {
+            "type": "integer",
+            "description": "渠道类别",
+            "format": "int32"
+          },
+          "zoneIndex": {
+            "type": "integer",
+            "description": "分区",
+            "format": "int32"
+          },
+          "zoneName": {
+            "type": "string",
+            "description": "分区名称"
+          },
+          "timeCost": {
+            "type": "string",
+            "description": "时效"
+          },
+          "channelAdvantage": {
+            "type": "string",
+            "description": "渠道优势"
+          },
+          "typeRemarks": {
+            "type": "array",
+            "description": "类型备注",
+            "items": {
+              "$ref": "#/components/schemas/CLCM_TypeRemark"
+            }
+          },
+          "volumeDivisor": {
+            "type": "integer",
+            "description": "材积除数",
+            "format": "int32"
+          },
+          "remoteLevel": {
+            "type": "string",
+            "description": "偏远等级"
+          },
+          "businessType": {
+            "type": "integer",
+            "description": "业务类型",
+            "format": "int32"
+          },
+          "departurePort": {
+            "type": "string",
+            "description": "起运机场/港"
+          },
+          "chargeWeight": {
+            "type": "number",
+            "description": "计费重"
+          },
+          "weightUnit": {
+            "type": "integer",
+            "description": "重量单位(0:CM/KG 1:IN/LBS)",
+            "format": "int32"
+          },
+          "freight": {
+            "$ref": "#/components/schemas/CLPRO_OpenApiQueryPriceResponse$CalFeeModel"
+          },
+          "surcharges": {
+            "type": "array",
+            "description": "附加费",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiQueryPriceResponse$CalFeeModel"
+            }
+          },
+          "fees": {
+            "type": "array",
+            "description": "费用明细",
+            "items": {
+              "$ref": "#/components/schemas/CLPRO_OpenApiQueryPriceResponse$CalFeeModel"
+            }
+          },
+          "totalSurchargeConversion": {
+            "type": "number",
+            "description": "附加费金额(RMB)"
+          },
+          "totalConversion": {
+            "type": "number",
+            "description": "总费用(RMB)"
+          },
+          "freightUnitConversion": {
+            "type": "number",
+            "description": "运费单价(RMB/KG)"
+          }
+        },
+        "description": "查价Response"
+      },
+      "CLPRO_OpenApiQueryPriceResponse$CalFeeModel": {
+        "type": "object",
+        "properties": {
+          "subjectName": {
+            "type": "string",
+            "description": "科目名"
+          },
+          "subjectCode": {
+            "type": "string",
+            "description": "科目代码"
+          },
+          "originalValue": {
+            "type": "number",
+            "description": "原始金额(不含油金额)"
+          },
+          "fuelSurchargeValue": {
+            "type": "number",
+            "description": "燃油费金额"
+          },
+          "value": {
+            "type": "number",
+            "description": "原币金额(含油金额)"
+          },
+          "conversionValue": {
+            "type": "number",
+            "description": "本币金额"
+          },
+          "currency": {
+            "type": "string",
+            "description": "币种"
+          },
+          "formula": {
+            "type": "string",
+            "description": "公式"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "discount": {
+            "type": "string",
+            "description": "折扣"
+          }
+        },
+        "description": "费用明细"
+      }
+    }
+  },
+  "x-openapi": {
+    "x-setting": {
+      "customCode": 200,
+      "language": "zh-CN",
+      "enableSwaggerModels": false,
+      "swaggerModelName": "Swagger Models",
+      "enableReloadCacheParameter": false,
+      "enableAfterScript": true,
+      "enableDocumentManage": false,
+      "enableVersion": false,
+      "enableRequestCache": true,
+      "enableFilterMultipartApis": false,
+      "enableFilterMultipartApiMethodType": "POST",
+      "enableHost": false,
+      "enableHostText": "",
+      "enableDynamicParameter": false,
+      "enableDebug": false,
+      "enableFooter": true,
+      "enableFooterCustom": false,
+      "enableSearch": true,
+      "enableOpenApi": true,
+      "enableHomeCustom": false,
+      "enableGroup": true,
+      "enableResponseCode": true
+    },
+    "x-markdownFiles": []
+  }
+}
