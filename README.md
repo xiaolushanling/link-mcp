@@ -25,7 +25,7 @@ uvx --from git+https://github.com/xiaolushanling/link-mcp.git link-mcp --help
       "command": "uvx",
       "args": ["--from", "git+https://github.com/xiaolushanling/link-mcp.git", "link-mcp"],
       "env": {
-        "LINK_API_BASE_URL": "https://demo.linkl.com.cn/api",
+        "LINK_API_BASE_URL": "{origin}/api",
         "LINK_TOKEN": "YOUR_LINK_TOKEN",
         "LINK_CUSTOMER_KEY": "YOUR_CUSTOMER_KEY"
       }
@@ -65,7 +65,7 @@ Copy-Item .env.example .env
 编辑 `.env`：
 
 ```dotenv
-LINK_API_BASE_URL=https://demo.linkl.com.cn/api
+LINK_API_BASE_URL={origin}/api
 LINK_TOKEN=替换为对应环境的linkToken
 LINK_CUSTOMER_KEY=替换为客户customerKey
 ```
@@ -96,8 +96,8 @@ stdio 启动后等待 MCP 客户端通信，终端没有欢迎消息属于正常
   "mcpServers": {
     "link-mcp": {
       "type": "stdio",
-      "command": "D:/pythonProjects/link-mcp/.venv/Scripts/python.exe",
-      "args": ["D:/pythonProjects/link-mcp/server.py"]
+      "command": "{path}/link-mcp/.venv/Scripts/python.exe",
+      "args": ["{path}/link-mcp/server.py"]
     }
   }
 }
