@@ -1,7 +1,7 @@
 {
   "source_url": "https://demo.linkl.com.cn/doc/index.html",
   "api_base_url": "https://demo.linkl.com.cn/api",
-  "snapshot_date": "2026-11-06",
+  "snapshot_date": "2026-11-11",
   "services": [
     {
       "id": "user",

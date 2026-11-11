@@ -10,6 +10,8 @@ from mcp.types import CallToolResult, TextContent, Tool, ToolAnnotations
 from .catalog import Catalog, object_schema
 from .client import ApiError, LinkClient
 from .config import Settings
+from .profiles import CUSTOMER_TOOLS, customer_tool
+from .schema_view import field_summaries, select_field
 
 
 def validation_message(error: ValidationError) -> str:
@@ -57,8 +59,11 @@ class Runtime:
             for name, operation in self.catalog.operations.items()
             if (not settings.services or operation.service in settings.services)
             and (not settings.read_only or operation.read_only)
+            and (settings.profile != "customer" or name in CUSTOMER_TOOLS)
         }
         self.tools = {name: operation.to_tool() for name, operation in self.operations.items()}
+        if settings.profile == "customer":
+            self.tools = {name: customer_tool(tool) for name, tool in self.tools.items()}
         for tool in self._helper_tools():
             self.tools[tool.name] = tool
         self.validators = {
@@ -102,6 +107,19 @@ class Runtime:
                         "type": "string",
                         "description": "link_search_apis 返回的完整 tool_name",
                     },
+                    "section": {
+                        "type": "string",
+                        "enum": ["all", "summary", "input", "responses"],
+                        "default": "all",
+                        "description": "大型模型先用 summary 查看字段，"
+                        "再用 input 和 field_path 获取约束",
+                    },
+                    "field_path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 500,
+                        "description": "仅 section=input 时使用，如 body.recipient、body.pieces[]",
+                    },
                 },
             ),
         ]
@@ -128,6 +146,8 @@ class Runtime:
             "source_url": self.catalog.manifest["source_url"],
             "snapshot_date": self.catalog.manifest.get("snapshot_date"),
             "api_base_url": self.settings.api_base_url,
+            "profile": self.settings.profile,
+            "customer_identity_locked": self.settings.profile == "customer",
             "read_only": self.settings.read_only,
             "token_configured": bool(self.settings.token.get_secret_value().strip()),
             "customer_key_configured": bool(self.settings.customer_key.get_secret_value()),
@@ -152,13 +172,46 @@ class Runtime:
             raise ApiError(
                 "unknown_api", "接口不存在或未启用，请使用 link_search_apis 查找可用工具。"
             )
-        return self.operations[name].describe()
+        description = self.operations[name].describe()
+        if self.settings.profile == "customer":
+            description["input_schema"] = self.tools[name].input_schema
+            description["notes"] = [
+                "客户模式：连接器固定使用配置中的客户身份，不接受工具参数指定 customerKey。",
+                "网关和凭证在客户端的安全配置中设置，不要在会话中提供凭证。",
+                "上游仍须验证凭证权限及运单归属；本模式不替代业务服务的权限校验。",
+            ]
+        return description
 
     def _local_call(self, name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         if name == "link_list_services":
             return self.list_services()
         if name == "link_describe_api":
-            return self.describe(arguments["tool_name"])
+            description = self.describe(arguments["tool_name"])
+            section = arguments.get("section", "all")
+            path = arguments.get("field_path")
+            if path and section != "input":
+                raise ApiError("invalid_section", "field_path 需要同时指定 section=input。")
+            if section == "all":
+                return description
+            result = {
+                key: value
+                for key, value in description.items()
+                if key not in {"input_schema", "response_schemas"}
+            }
+            if section == "summary":
+                result["input_fields"] = field_summaries(description["input_schema"])
+                result["response_types"] = list(description["response_schemas"])
+            elif section == "input":
+                result["input_schema"] = (
+                    select_field(description["input_schema"], path)
+                    if path
+                    else description["input_schema"]
+                )
+                if path:
+                    result["field_path"] = path
+            else:
+                result["response_schemas"] = description["response_schemas"]
+            return result
         query = arguments.get("query", "").casefold()
         service = arguments.get("service")
         items = [
@@ -257,10 +310,23 @@ class Runtime:
         try:
             if name not in self.tools:
                 raise ApiError("unknown_tool", "工具不存在或未启用，请使用 link_search_apis 查找。")
+            if self.settings.profile == "customer" and isinstance(arguments.get("body"), dict):
+                if any(str(key).casefold() == "customerkey" for key in arguments["body"]):
+                    raise ApiError(
+                        "customer_identity_locked",
+                        "客户身份由连接器固定配置，请移除 body 中的客户凭证字段。",
+                    )
             self.validators[name].validate(arguments)
             if name not in self.operations:
                 return self._result({"success": True, "result": self._local_call(name, arguments)})
             operation = self.operations[name]
+            if self.settings.profile == "customer" and not (
+                self.settings.customer_key.get_secret_value().strip()
+            ):
+                raise ApiError(
+                    "missing_customer_key",
+                    "请在客户端安全配置中绑定 LINK_CUSTOMER_KEY 后重新连接；不要在会话中发送凭证。",
+                )
             request = copy.deepcopy(
                 {
                     key: value

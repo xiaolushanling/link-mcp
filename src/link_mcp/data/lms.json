@@ -427,26 +427,36 @@
             "maxLength": 100,
             "type": "string",
             "description": "客户单号",
-            "example": "TEST000000001"
+            "example": "DEMO202611030001"
           },
           "noType": {
             "type": "integer",
             "description": "上传单号类型(2:转单号 9:FBA单号)",
-            "format": "int32"
+            "format": "int32",
+            "example": 2
           },
           "no": {
             "type": "string",
-            "description": "上传单号"
+            "description": "上传单号",
+            "example": "LMS202611030001"
           },
           "pieces": {
             "type": "array",
             "description": "单件信息,上传转单号必填",
+            "example": [
+              {
+                "no": "LMS202611030001"
+              },
+              {
+                "no": "LMS202611030001"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiUploadNoRequest$UploadNoPieceRequest"
             }
           }
         },
-        "description": "上传单号Request"
+        "description": "上传单号请求"
       },
       "CLLRO_OpenApiUploadNoRequest$UploadNoPieceRequest": {
         "required": [
@@ -456,10 +466,19 @@
         "properties": {
           "no": {
             "type": "string",
-            "description": "上传单号"
+            "description": "上传单号",
+            "example": "LMS202611030001"
           }
         },
-        "description": "单件信息"
+        "description": "单件信息请求",
+        "example": [
+          {
+            "no": "LMS202611030001"
+          },
+          {
+            "no": "LMS202611030001"
+          }
+        ]
       },
       "CLCM_Result": {
         "type": "object",
@@ -496,17 +515,24 @@
             "maxLength": 100,
             "type": "string",
             "description": "客户单号",
-            "example": "TEST000000001"
+            "example": "DEMO202611030001"
           },
           "fileList": {
             "type": "array",
             "description": "文件信息",
+            "example": [
+              {
+                "type": 0,
+                "fileName": "commercial-invoice.pdf",
+                "base64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiUploadFileRequest$UploadFileModeRequest"
             }
           }
         },
-        "description": "上传文件Request"
+        "description": "上传文件请求"
       },
       "CLLRO_OpenApiUploadFileRequest$UploadFileModeRequest": {
         "required": [
@@ -519,18 +545,28 @@
           "type": {
             "type": "integer",
             "description": "文件类型(0:客户发票 70:报关文件 100:转单标签 110:转单发票 150:销售凭证 155:商检证明 185:产地证 205:交易证明)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "fileName": {
             "type": "string",
-            "description": "文件名(包含后缀)"
+            "description": "文件名(包含后缀)",
+            "example": "commercial-invoice.pdf"
           },
           "base64": {
             "type": "string",
-            "description": "文件base64"
+            "description": "文件base64",
+            "example": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
           }
         },
-        "description": "文件信息"
+        "description": "文件信息请求",
+        "example": [
+          {
+            "type": 0,
+            "fileName": "commercial-invoice.pdf",
+            "base64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
+          }
+        ]
       },
       "CLLRO_OpenApiCommodityRequest": {
         "type": "object",
@@ -538,141 +574,210 @@
           "nameCn": {
             "maxLength": 255,
             "type": "string",
-            "description": "中文品名"
+            "description": "中文品名",
+            "example": "纯棉T恤"
           },
           "nameEn": {
             "maxLength": 255,
             "type": "string",
-            "description": "英文品名"
+            "description": "英文品名",
+            "example": "Cotton T-shirt"
           },
           "unitNetWeight": {
             "type": "number",
-            "description": "单品名净重"
+            "description": "单品名净重",
+            "example": 0.2
           },
           "sku": {
             "maxLength": 100,
             "type": "string",
-            "description": "SKU"
+            "description": "SKU",
+            "example": "TSHIRT-WHITE-M"
           },
           "asin": {
             "type": "string",
-            "description": "ASIN"
+            "description": "ASIN",
+            "example": "B0DEMO0001"
           },
           "fnSku": {
             "type": "string",
-            "description": "FNSKU"
+            "description": "FNSKU",
+            "example": "X00DEMO001"
           },
           "purposeCn": {
             "maxLength": 100,
             "type": "string",
-            "description": "中文用途"
+            "description": "中文用途",
+            "example": "日常穿着"
           },
           "purposeEn": {
             "maxLength": 100,
             "type": "string",
-            "description": "英文用途"
+            "description": "英文用途",
+            "example": "Daily wear"
           },
           "materialCn": {
             "maxLength": 100,
             "type": "string",
-            "description": "中文材质"
+            "description": "中文材质",
+            "example": "100%棉"
           },
           "materialEn": {
             "maxLength": 100,
             "type": "string",
-            "description": "英文材质"
+            "description": "英文材质",
+            "example": "100% cotton"
           },
           "quantity": {
             "type": "integer",
             "description": "数量",
-            "format": "int32"
+            "format": "int32",
+            "example": 10
           },
           "unit": {
             "type": "integer",
             "description": "单位(非必填，默认值0:PCS)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "unitPrice": {
             "type": "number",
-            "description": "单价"
+            "description": "单价",
+            "example": 20
           },
           "brand": {
             "maxLength": 50,
             "type": "string",
-            "description": "品牌"
+            "description": "品牌",
+            "example": "DEMO"
           },
           "norms": {
             "maxLength": 50,
             "type": "string",
-            "description": "规格"
+            "description": "规格",
+            "example": "M / White"
           },
           "hsCode": {
             "maxLength": 50,
             "type": "string",
-            "description": "海关编码"
+            "description": "海关编码",
+            "example": "6109100000"
           },
           "origin": {
             "type": "string",
-            "description": "原产地"
+            "description": "原产地",
+            "example": "CN"
           },
           "link": {
             "maxLength": 255,
             "type": "string",
-            "description": "链接"
+            "description": "链接",
+            "example": "https://files.example.com/DEMO202611030001/label.pdf"
           },
           "imageUrl": {
             "maxLength": 500,
             "type": "string",
-            "description": "图片地址"
+            "description": "图片地址",
+            "example": "https://files.example.com/products/cotton-t-shirt.jpg"
           },
           "importHsCode": {
             "maxLength": 100,
             "type": "string",
-            "description": "进口海关编码"
+            "description": "进口海关编码",
+            "example": "6109100012"
           },
           "declareElement": {
             "maxLength": 200,
             "type": "string",
-            "description": "申报要素"
+            "description": "申报要素",
+            "example": "品牌:DEMO;材质:100%棉;用途:日常穿着"
           },
           "model": {
             "type": "string",
-            "description": "型号(长度:[255])"
+            "description": "型号(长度:[255])",
+            "example": "TSHIRT-M"
           },
           "goodsDescs": {
             "type": "array",
             "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+            "example": [
+              "普货"
+            ],
             "items": {
               "type": "string",
-              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)"
+              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+              "example": "[\"普货\"]"
             }
           },
           "productVersion": {
             "type": "string",
-            "description": "产品证书版本ID(长度:[64])"
+            "description": "产品证书版本ID(长度:[64])",
+            "example": "1.0"
           },
           "certificateId": {
             "type": "string",
-            "description": "认证机构ID(长度:[64])"
+            "description": "认证机构ID(长度:[64])",
+            "example": "DEMO-CERT-001"
           },
           "registryProductId": {
             "type": "string",
-            "description": "注册产品ID(长度:[64])"
+            "description": "注册产品ID(长度:[64])",
+            "example": "DEMO-REG-001"
           },
           "merchantProductId": {
             "type": "string",
-            "description": "商户产品标识符 M-PID"
+            "description": "商户产品标识符 M-PID",
+            "example": "DEMO-TSHIRT-WHITE-M",
+            "x-added-at": "2026-11-03"
           },
           "nonStandardManufacturerProductId": {
             "type": "string",
-            "description": "制造商内部SKU NS-PID"
+            "description": "制造商内部SKU NS-PID",
+            "x-added-at": "2026-11-03"
           },
           "standardManufacturerProductId": {
             "type": "string",
-            "description": "标准标识符  S-PID"
+            "description": "标准标识符  S-PID",
+            "example": "DEMO-STD-001",
+            "x-added-at": "2026-11-03"
           }
         },
-        "description": "商品信息"
+        "description": "商品信息请求",
+        "example": [
+          {
+            "nameCn": "纯棉T恤",
+            "nameEn": "Cotton T-shirt",
+            "unitNetWeight": 0.2,
+            "sku": "TSHIRT-WHITE-M",
+            "asin": "B0DEMO0001",
+            "fnSku": "X00DEMO001",
+            "purposeCn": "日常穿着",
+            "purposeEn": "Daily wear",
+            "materialCn": "100%棉",
+            "materialEn": "100% cotton",
+            "quantity": 10,
+            "unit": 0,
+            "unitPrice": 20,
+            "brand": "DEMO",
+            "norms": "M / White",
+            "hsCode": "6109100000",
+            "origin": "CN",
+            "link": "https://files.example.com/DEMO202611030001/label.pdf",
+            "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+            "importHsCode": "6109100012",
+            "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+            "model": "TSHIRT-M",
+            "goodsDescs": [
+              "普货"
+            ],
+            "productVersion": "1.0",
+            "certificateId": "DEMO-CERT-001",
+            "registryProductId": "DEMO-REG-001",
+            "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+            "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+            "standardManufacturerProductId": "DEMO-STD-001"
+          }
+        ]
       },
       "CLLRO_OpenApiDocumentOptionRequest": {
         "type": "object",
@@ -680,25 +785,35 @@
           "requiredPieceBarcode": {
             "type": "integer",
             "description": "是否需要入仓标签(0:不需要(默认) 1:需要)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "requiredLabel": {
             "type": "integer",
             "description": "是否需要label(0:否 1:是(默认))",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "requiredInvoice": {
             "type": "integer",
             "description": "是否需要发票(0:不需要(默认) 1:需要)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "requiredCopy": {
             "type": "integer",
             "description": "是否需要copy联(0:不需要(默认) 1:需要，仅UPS适用)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           }
         },
-        "description": "文档属性"
+        "description": "文档属性请求",
+        "example": {
+          "requiredPieceBarcode": 1,
+          "requiredLabel": 1,
+          "requiredInvoice": 1,
+          "requiredCopy": 0
+        }
       },
       "CLLRO_OpenApiOrderRequest$OpenApiFileRequest": {
         "required": [
@@ -711,90 +826,134 @@
           "type": {
             "type": "integer",
             "description": "文件类型(0:客户发票 150:销售凭证 155:商检证明 185:产地证 205:交易证明)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "fileName": {
             "type": "string",
-            "description": "文件名(包含后缀)"
+            "description": "文件名(包含后缀)",
+            "example": "commercial-invoice.pdf"
           },
           "base64": {
             "type": "string",
-            "description": "文件base64"
+            "description": "文件base64",
+            "example": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
           }
         },
-        "description": "文件信息"
+        "description": "文件信息请求",
+        "example": [
+          {
+            "type": 0,
+            "fileName": "commercial-invoice.pdf",
+            "base64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
+          }
+        ]
       },
       "CLLRO_OpenApiOrderRequest$OpenApiImporterRequest": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "名称"
+            "description": "名称",
+            "example": "Alex Smith"
           },
           "company": {
             "type": "string",
-            "description": "公司"
+            "description": "公司",
+            "example": "Example Trading LLC"
           },
           "phone": {
             "type": "string",
-            "description": "电话"
+            "description": "电话",
+            "example": "+1-213-555-0147"
           },
           "fax": {
             "type": "string",
-            "description": "传真"
+            "description": "传真",
+            "example": "+1-213-555-0148"
           },
           "email": {
             "type": "string",
-            "description": "邮箱"
+            "description": "邮箱",
+            "example": "recipient@example.com"
           },
           "countryCode": {
             "type": "string",
-            "description": "国家代码"
+            "description": "国家代码",
+            "example": "US"
           },
           "state": {
             "type": "string",
-            "description": "省"
+            "description": "省",
+            "example": "CA"
           },
           "city": {
             "type": "string",
-            "description": "市"
+            "description": "市",
+            "example": "Los Angeles"
           },
           "postcode": {
             "type": "string",
-            "description": "邮编"
+            "description": "邮编",
+            "example": "90001"
           },
           "address1": {
             "type": "string",
-            "description": "地址1"
+            "description": "地址1",
+            "example": "123 Example Street"
           },
           "address2": {
             "type": "string",
-            "description": "地址2"
+            "description": "地址2",
+            "example": "Suite 200"
           },
           "address3": {
             "type": "string",
-            "description": "地址3"
+            "description": "地址3",
+            "example": "Building A"
           },
           "taxType1": {
             "type": "integer",
             "description": "税号类型1(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "taxNo1": {
             "type": "string",
-            "description": "税号1"
+            "description": "税号1",
+            "example": "12-3456789"
           },
           "taxType2": {
             "type": "integer",
             "description": "税号类型2(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "taxNo2": {
             "type": "string",
-            "description": "税号2"
+            "description": "税号2",
+            "example": "DEMO-TAX-002"
           }
         },
-        "description": "进口商"
+        "description": "进口商请求",
+        "example": {
+          "name": "Alex Smith",
+          "company": "Example Trading LLC",
+          "phone": "+1-213-555-0147",
+          "fax": "+1-213-555-0148",
+          "email": "recipient@example.com",
+          "countryCode": "US",
+          "state": "CA",
+          "city": "Los Angeles",
+          "postcode": "90001",
+          "address1": "123 Example Street",
+          "address2": "Suite 200",
+          "address3": "Building A",
+          "taxType1": 1,
+          "taxNo1": "12-3456789",
+          "taxType2": 0,
+          "taxNo2": "DEMO-TAX-002"
+        }
       },
       "CLLRO_OpenApiOrderRequest$OpenApiRecipientRequest": {
         "required": [
@@ -805,171 +964,251 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "姓名"
+            "description": "姓名",
+            "example": "Alex Smith"
           },
           "company": {
             "type": "string",
-            "description": "公司"
+            "description": "公司",
+            "example": "Example Trading LLC"
           },
           "phone": {
             "type": "string",
-            "description": "电话"
+            "description": "电话",
+            "example": "+1-213-555-0147"
           },
           "email": {
             "type": "string",
-            "description": "邮箱"
+            "description": "邮箱",
+            "example": "recipient@example.com"
           },
           "countryCode": {
             "type": "string",
-            "description": "国家代码"
+            "description": "国家代码",
+            "example": "US"
           },
           "state": {
             "type": "string",
-            "description": "省/州简码"
+            "description": "省/州简码",
+            "example": "CA"
           },
           "city": {
             "type": "string",
-            "description": "市"
+            "description": "市",
+            "example": "Los Angeles"
           },
           "postcode": {
             "type": "string",
-            "description": "邮编"
+            "description": "邮编",
+            "example": "90001"
           },
           "address1": {
             "type": "string",
-            "description": "地址1"
+            "description": "地址1",
+            "example": "123 Example Street"
           },
           "address2": {
             "type": "string",
-            "description": "地址2"
+            "description": "地址2",
+            "example": "Suite 200"
           },
           "address3": {
             "type": "string",
-            "description": "地址3"
+            "description": "地址3",
+            "example": "Building A"
           },
           "taxType1": {
             "type": "integer",
             "description": "税号类型1(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST 11:CNPJ 12:CPF)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "taxNo1": {
             "type": "string",
-            "description": "税号1"
+            "description": "税号1",
+            "example": "12-3456789"
           },
           "taxType2": {
             "type": "integer",
             "description": "税号类型2(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST 11:CNPJ 12:CPF)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "taxNo2": {
             "type": "string",
-            "description": "税号2"
+            "description": "税号2",
+            "example": "DEMO-TAX-002"
           },
           "suburb": {
             "type": "string",
-            "description": "郊区"
+            "description": "郊区",
+            "example": "Florence"
           },
           "houseNumber": {
             "type": "string",
-            "description": "门牌号"
+            "description": "门牌号",
+            "example": "123"
           },
           "fbaWarehouseCode": {
             "type": "string",
-            "description": "FBA仓库代码"
+            "description": "FBA仓库代码",
+            "example": "ONT8"
           },
           "partyType": {
             "type": "integer",
             "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "cardType": {
             "type": "integer",
             "description": "证件类型 1:身份证 2:护照",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "cardNo": {
             "type": "string",
-            "description": "证件号码"
+            "description": "证件号码",
+            "example": "DEMO-CERT-001"
           }
         },
-        "description": "收件人"
+        "description": "收件人请求",
+        "example": {
+          "name": "Alex Smith",
+          "company": "Example Trading LLC",
+          "phone": "+1-213-555-0147",
+          "email": "recipient@example.com",
+          "countryCode": "US",
+          "state": "CA",
+          "city": "Los Angeles",
+          "postcode": "90001",
+          "address1": "123 Example Street",
+          "address2": "Suite 200",
+          "address3": "Building A",
+          "taxType1": 1,
+          "taxNo1": "12-3456789",
+          "taxType2": 0,
+          "taxNo2": "DEMO-TAX-002",
+          "suburb": "Florence",
+          "houseNumber": "123",
+          "fbaWarehouseCode": "ONT8",
+          "partyType": 1,
+          "cardType": 1,
+          "cardNo": "DEMO-CERT-001"
+        }
       },
       "CLLRO_OpenApiOrderRequest$OpenApiSenderRequest": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "姓名"
+            "description": "姓名",
+            "example": "李明"
           },
           "company": {
             "type": "string",
-            "description": "公司"
+            "description": "公司",
+            "example": "深圳示例贸易有限公司"
           },
           "phone": {
             "type": "string",
-            "description": "电话"
+            "description": "电话",
+            "example": "+86-13800000000"
           },
           "email": {
             "type": "string",
-            "description": "邮箱"
+            "description": "邮箱",
+            "example": "sender@example.com"
           },
           "countryCode": {
             "type": "string",
-            "description": "国家代码"
+            "description": "国家代码",
+            "example": "CN"
           },
           "state": {
             "type": "string",
-            "description": "省/州简码"
+            "description": "省/州简码",
+            "example": "GD"
           },
           "city": {
             "type": "string",
-            "description": "市"
+            "description": "市",
+            "example": "Shenzhen"
           },
           "postcode": {
             "type": "string",
-            "description": "邮编"
+            "description": "邮编",
+            "example": "518000"
           },
           "address1": {
             "type": "string",
-            "description": "地址1"
+            "description": "地址1",
+            "example": "No. 1 Example Road, Nanshan District"
           },
           "address2": {
             "type": "string",
-            "description": "地址2"
+            "description": "地址2",
+            "example": "Building A"
           },
           "address3": {
             "type": "string",
-            "description": "地址3"
+            "description": "地址3",
+            "example": "Room 101"
           },
           "suburb": {
             "type": "string",
-            "description": "郊区"
+            "description": "郊区",
+            "example": "Nanshan"
           },
           "taxType1": {
             "type": "integer",
             "description": "税号类型1(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST 11:CNPJ 12:CPF)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "taxNo1": {
             "type": "string",
-            "description": "税号1"
+            "description": "税号1",
+            "example": "DEMO-CN-TAX-001"
           },
           "taxType2": {
             "type": "integer",
             "description": "税号类型2(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST 11:CNPJ 12:CPF)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "taxNo2": {
             "type": "string",
-            "description": "税号2"
+            "description": "税号2",
+            "example": "DEMO-TAX-002"
           },
           "partyType": {
             "type": "integer",
             "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           }
         },
-        "description": "发件人"
+        "description": "发件人请求",
+        "example": {
+          "name": "李明",
+          "company": "深圳示例贸易有限公司",
+          "phone": "+86-13800000000",
+          "email": "sender@example.com",
+          "countryCode": "CN",
+          "state": "GD",
+          "city": "Shenzhen",
+          "postcode": "518000",
+          "address1": "No. 1 Example Road, Nanshan District",
+          "address2": "Building A",
+          "address3": "Room 101",
+          "suburb": "Nanshan",
+          "taxType1": 1,
+          "taxNo1": "DEMO-CN-TAX-001",
+          "taxType2": 0,
+          "taxNo2": "DEMO-TAX-002",
+          "partyType": 1
+        }
       },
       "CLLRO_OpenApiOrderRequest$OpenApiTaxPayorRequest": {
         "type": "object",
@@ -977,165 +1216,244 @@
           "type": {
             "type": "integer",
             "description": "支付方式(0:寄付(PP) 1:到付(CC) 2:第三方付(TP)，默认到付(CC))",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "accountNumber": {
             "type": "string",
-            "description": "账号"
+            "description": "账号",
+            "example": "DEMO123456"
           },
           "name": {
             "type": "string",
-            "description": "名称"
+            "description": "名称",
+            "example": "Alex Smith"
           },
           "company": {
             "type": "string",
-            "description": "公司"
+            "description": "公司",
+            "example": "Example Trading LLC"
           },
           "phone": {
             "type": "string",
-            "description": "电话"
+            "description": "电话",
+            "example": "+1-213-555-0147"
           },
           "fax": {
             "type": "string",
-            "description": "传真"
+            "description": "传真",
+            "example": "+1-213-555-0148"
           },
           "email": {
             "type": "string",
-            "description": "邮箱"
+            "description": "邮箱",
+            "example": "recipient@example.com"
           },
           "countryCode": {
             "type": "string",
-            "description": "国家代码"
+            "description": "国家代码",
+            "example": "US"
           },
           "state": {
             "type": "string",
-            "description": "省"
+            "description": "省",
+            "example": "CA"
           },
           "city": {
             "type": "string",
-            "description": "市"
+            "description": "市",
+            "example": "Los Angeles"
           },
           "postcode": {
             "type": "string",
-            "description": "邮编"
+            "description": "邮编",
+            "example": "90001"
           },
           "address1": {
             "type": "string",
-            "description": "地址1"
+            "description": "地址1",
+            "example": "123 Example Street"
           },
           "address2": {
             "type": "string",
-            "description": "地址2"
+            "description": "地址2",
+            "example": "Suite 200"
           },
           "address3": {
             "type": "string",
-            "description": "地址3"
+            "description": "地址3",
+            "example": "Building A"
           }
         },
-        "description": "税金支付人"
+        "description": "税金支付人请求",
+        "example": {
+          "type": 0,
+          "accountNumber": "DEMO123456",
+          "name": "Alex Smith",
+          "company": "Example Trading LLC",
+          "phone": "+1-213-555-0147",
+          "fax": "+1-213-555-0148",
+          "email": "recipient@example.com",
+          "countryCode": "US",
+          "state": "CA",
+          "city": "Los Angeles",
+          "postcode": "90001",
+          "address1": "123 Example Street",
+          "address2": "Suite 200",
+          "address3": "Building A"
+        }
       },
       "CLLRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest": {
         "type": "object",
         "properties": {
           "productCode": {
             "type": "string",
-            "description": "产品代码"
+            "description": "产品代码",
+            "example": "US-EXPRESS-DEMO"
           },
           "declareValue": {
             "type": "number",
-            "description": "申报价值"
+            "description": "申报价值",
+            "example": 200
           },
           "declareCurrency": {
             "type": "string",
-            "description": "申报币种"
+            "description": "申报币种",
+            "example": "USD"
           },
           "orderRemark": {
             "type": "string",
-            "description": "下单备注"
+            "description": "下单备注",
+            "example": "普通货物，请妥善包装"
           },
           "tradeClause": {
             "type": "integer",
             "description": "贸易条款(0:DAP 1:DDP 2:EXW 3:FOB 4:CIF 5:CFR 6:DDU 7:FCA 8:CPT 9:CIP 10:DAF 11:DAT 12:DEQ 13:DES 14:FAS 15:DPU)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "needInsure": {
             "type": "integer",
             "description": "是否需要保险 0:否(默认) 1:是",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "declareType": {
             "type": "integer",
             "description": "报关方式(0:其他 1:单独报关 2:合并报关 3:买单报关)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "packageType": {
             "type": "integer",
             "description": "包裹类型(0:包裹(WPX)(默认) 1:文件(DOC) 2:包裹袋(PAK))",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "goodsDescs": {
             "type": "array",
             "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+            "example": [
+              "普货"
+            ],
             "items": {
               "type": "string",
-              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)"
+              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+              "example": "[\"普货\"]"
             }
           },
           "isPaperLess": {
             "type": "integer",
             "description": "是否无纸化(0:否 1:是(默认))",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "isSaturdayDelivery": {
             "type": "integer",
             "description": "是否周六派送(0:否(默认) 1:是)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "exportReason": {
             "type": "integer",
             "description": "出口原因(0:SALE 销售 1:GIFT 礼品 2:SAMPLE 样品 3:RETURN 退货 4:REPAIR 维修 5:REPLACEMENT 换货 6:PERSONAL_EFFECTS 个人物品 20:OTHER 其他)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "shipDate": {
             "pattern": "\\s*|[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])",
             "type": "string",
-            "description": "寄件日期，格式yyyy-MM-dd"
+            "description": "寄件日期，格式yyyy-MM-dd",
+            "example": "2026-11-03"
           },
           "signatureType": {
             "type": "integer",
             "description": "签名服务类型(0:无需签名(默认) 1:普通签名  2成人签名)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "declareFreightFee": {
             "type": "number",
-            "description": "申报运费"
+            "description": "申报运费",
+            "example": 30
           },
           "declareOtherFee": {
             "type": "number",
-            "description": "申报其他费用"
+            "description": "申报其他费用",
+            "example": 5
           },
           "declareHandlingFee": {
             "type": "number",
-            "description": "申报手续费用"
+            "description": "申报手续费用",
+            "example": 2
           },
           "declareInsuranceFee": {
             "type": "number",
-            "description": "申报保险费用"
+            "description": "申报保险费用",
+            "example": 3
           },
           "invoiceNumber": {
             "type": "string",
-            "description": "发票号码"
+            "description": "发票号码",
+            "example": "INV202611030001"
           },
           "invoiceRemark": {
             "type": "string",
-            "description": "发票备注"
+            "description": "发票备注",
+            "example": "Commercial invoice for cotton T-shirts"
           },
           "labelDesc": {
             "type": "string",
-            "description": "制单备注"
+            "description": "制单备注",
+            "example": "BOX001 / Cotton T-shirts"
           }
         },
-        "description": "运单信息"
+        "description": "运单信息请求",
+        "example": {
+          "productCode": "US-EXPRESS-DEMO",
+          "declareValue": 200,
+          "declareCurrency": "USD",
+          "orderRemark": "普通货物，请妥善包装",
+          "tradeClause": 0,
+          "needInsure": 0,
+          "declareType": 0,
+          "packageType": 0,
+          "goodsDescs": [
+            "普货"
+          ],
+          "isPaperLess": 1,
+          "isSaturdayDelivery": 0,
+          "exportReason": 0,
+          "shipDate": "2026-11-03",
+          "signatureType": 0,
+          "declareFreightFee": 30,
+          "declareOtherFee": 5,
+          "declareHandlingFee": 2,
+          "declareInsuranceFee": 3,
+          "invoiceNumber": "INV202611030001",
+          "invoiceRemark": "Commercial invoice for cotton T-shirts",
+          "labelDesc": "BOX001 / Cotton T-shirts"
+        }
       },
       "CLLRO_OpenApiSpecialLineOrderRequest": {
         "required": [
@@ -1155,17 +1473,18 @@
             "maxLength": 100,
             "type": "string",
             "description": "客户单号",
-            "example": "TEST000000001"
+            "example": "DEMO202611030001"
           },
           "customerExtraNo": {
             "maxLength": 100,
             "type": "string",
             "description": "客户额外单号",
-            "example": "TEST000000001"
+            "example": "PO202611030001"
           },
           "bookingConfirmationNumber": {
             "type": "string",
-            "description": "大货预约编号(用于FedEx IPF、IEF等Freight服务)"
+            "description": "大货预约编号(用于FedEx IPF、IEF等Freight服务)",
+            "example": "DEMO-FRT-20261103-001"
           },
           "info": {
             "$ref": "#/components/schemas/CLLRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest"
@@ -1185,7 +1504,8 @@
           "mode": {
             "type": "integer",
             "description": "模式(0:同时制单 1:仅下单)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "documentOption": {
             "$ref": "#/components/schemas/CLLRO_OpenApiDocumentOptionRequest"
@@ -1193,7 +1513,7 @@
           "ecomPlatformType": {
             "type": "string",
             "description": "电商平台类型(DHGATE:敦煌 WISH:wish EBAY:ebay ALI-EXPRESS:速卖通 JD:京东 TEMU:TEMU TIKTOK:tiktok AMAZON:亚马逊 SHOPEE:虾皮 LAZADA:来赞达 SHEIN:希音 SHOPIFY:SHOPIFY WALMART:沃尔玛 OZON:OZON JOOM:JOOM ALIBABA:阿里巴巴国际站 MERCADO:美客多 ETSY:ETSY SHOPLAZZA:店匠 WOOCOMMERCE:WOOCOMMERCE SHOPYY:SHOPYY UEESHOP:UEESHOP SHOPLINE:SHOPLINE CDISCOUNT:CDISCOUNT DARAZ:达拉兹 COUPANG:酷澎 ALLEGRO:ALLEGRO JUMIA:JUMIA MAGENTO:MAGENTO BIGCOMMERCE:BIGCOMMERCE KILIMALL:KILIMALL GEARBEST:GEARBEST TIKI:TIKI SHOPBASE:SHOPBASE KAUFLAND:KAUFLAND FUNPINPIN:FUNPINPIN ALLVALUE:有赞 SHOPEXP:shopexpress FNAC:FNAC RAKUTEN:乐天 QOO10:趣天 1688:1688 OTHER:其他来源(例如:手工订单))",
-            "example": "JD"
+            "example": "AMAZON"
           },
           "ecomErpType": {
             "type": "string",
@@ -1203,20 +1523,24 @@
           "ecomEarliestTimeBuyLabel": {
             "type": "integer",
             "description": "电商最早可买单时间(毫秒时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793671200000
           },
           "ecomSendDealLineTime": {
             "type": "integer",
             "description": "电商发货截止时间(毫秒时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793844000000
           },
           "ecomBuyLabelAreaCode": {
             "type": "string",
-            "description": "电商买单仓库代码"
+            "description": "电商买单仓库代码",
+            "example": "US"
           },
           "ecomBuyLabelChannel": {
             "type": "string",
-            "description": "电商买单渠道"
+            "description": "电商买单渠道",
+            "example": "US-AIR-DEMO"
           },
           "ecomInfo": {
             "type": "object",
@@ -1228,15 +1552,28 @@
             },
             "additionalProperties": {
               "type": "object",
-              "description": "电商信息"
+              "description": "电商信息",
+              "example": {
+                "ecomBuyLabelUrl": "https://files.example.com/DEMO202611030001/label.pdf"
+              }
             },
-            "description": "电商信息"
+            "description": "电商信息",
+            "example": {
+              "ecomBuyLabelUrl": "https://files.example.com/DEMO202611030001/label.pdf"
+            }
           },
           "files": {
             "maxItems": 4,
             "minItems": 0,
             "type": "array",
             "description": "文件信息",
+            "example": [
+              {
+                "type": 0,
+                "fileName": "commercial-invoice.pdf",
+                "base64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiOrderRequest$OpenApiFileRequest"
             }
@@ -1244,60 +1581,287 @@
           "boxes": {
             "type": "array",
             "description": "装箱信息",
+            "example": [
+              {
+                "boxNo": "BOX001",
+                "actualWeight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001",
+                "commodities": [
+                  {
+                    "nameCn": "纯棉T恤",
+                    "nameEn": "Cotton T-shirt",
+                    "unitNetWeight": 0.2,
+                    "sku": "TSHIRT-WHITE-M",
+                    "asin": "B0DEMO0001",
+                    "fnSku": "X00DEMO001",
+                    "purposeCn": "日常穿着",
+                    "purposeEn": "Daily wear",
+                    "materialCn": "100%棉",
+                    "materialEn": "100% cotton",
+                    "quantity": 5,
+                    "unit": 0,
+                    "unitPrice": 20,
+                    "brand": "DEMO",
+                    "norms": "M / White",
+                    "hsCode": "6109100000",
+                    "origin": "CN",
+                    "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                    "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                    "importHsCode": "6109100012",
+                    "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                    "model": "TSHIRT-M",
+                    "goodsDescs": [
+                      "普货"
+                    ],
+                    "productVersion": "1.0",
+                    "certificateId": "DEMO-CERT-001",
+                    "registryProductId": "DEMO-REG-001",
+                    "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                    "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                    "standardManufacturerProductId": "DEMO-STD-001"
+                  }
+                ]
+              },
+              {
+                "boxNo": "BOX002",
+                "actualWeight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001",
+                "commodities": [
+                  {
+                    "nameCn": "纯棉T恤",
+                    "nameEn": "Cotton T-shirt",
+                    "unitNetWeight": 0.2,
+                    "sku": "TSHIRT-WHITE-M",
+                    "asin": "B0DEMO0001",
+                    "fnSku": "X00DEMO001",
+                    "purposeCn": "日常穿着",
+                    "purposeEn": "Daily wear",
+                    "materialCn": "100%棉",
+                    "materialEn": "100% cotton",
+                    "quantity": 5,
+                    "unit": 0,
+                    "unitPrice": 20,
+                    "brand": "DEMO",
+                    "norms": "M / White",
+                    "hsCode": "6109100000",
+                    "origin": "CN",
+                    "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                    "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                    "importHsCode": "6109100012",
+                    "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                    "model": "TSHIRT-M",
+                    "goodsDescs": [
+                      "普货"
+                    ],
+                    "productVersion": "1.0",
+                    "certificateId": "DEMO-CERT-001",
+                    "registryProductId": "DEMO-REG-001",
+                    "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                    "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                    "standardManufacturerProductId": "DEMO-STD-001"
+                  }
+                ]
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiSpecialLineOrderRequest$OpenApiOrderBoxRequest"
             }
           }
         },
-        "description": "专线下单Request"
+        "description": "专线下单请求"
       },
       "CLLRO_OpenApiSpecialLineOrderRequest$OpenApiOrderBoxRequest": {
         "type": "object",
         "properties": {
           "boxNo": {
             "type": "string",
-            "description": "箱号(客户自定义)"
+            "description": "箱号(客户自定义)",
+            "example": "BOX001"
           },
           "actualWeight": {
             "type": "number",
-            "description": "重量"
+            "description": "重量",
+            "example": 5
           },
           "length": {
             "type": "number",
-            "description": "长度"
+            "description": "长度",
+            "example": 40
           },
           "width": {
             "type": "number",
-            "description": "宽度"
+            "description": "宽度",
+            "example": 30
           },
           "height": {
             "type": "number",
-            "description": "高度"
+            "description": "高度",
+            "example": 25
           },
           "fbaShipmentId": {
             "maxLength": 50,
             "type": "string",
-            "description": "FBA货件ID(FBA shipmentId)"
+            "description": "FBA货件ID(FBA shipmentId)",
+            "example": "FBADEMO00001"
           },
           "fbaReferenceId": {
             "maxLength": 100,
             "type": "string",
-            "description": "FBA内部参考ID(FBA Amazon Reference ID)"
+            "description": "FBA内部参考ID(FBA Amazon Reference ID)",
+            "example": "1234567890"
           },
           "purchaseOrderNumber": {
             "maxLength": 100,
             "type": "string",
-            "description": "PO预约号"
+            "description": "PO预约号",
+            "example": "PO202611030001"
           },
           "commodities": {
             "type": "array",
             "description": "商品信息",
+            "example": [
+              {
+                "nameCn": "纯棉T恤",
+                "nameEn": "Cotton T-shirt",
+                "unitNetWeight": 0.2,
+                "sku": "TSHIRT-WHITE-M",
+                "asin": "B0DEMO0001",
+                "fnSku": "X00DEMO001",
+                "purposeCn": "日常穿着",
+                "purposeEn": "Daily wear",
+                "materialCn": "100%棉",
+                "materialEn": "100% cotton",
+                "quantity": 10,
+                "unit": 0,
+                "unitPrice": 20,
+                "brand": "DEMO",
+                "norms": "M / White",
+                "hsCode": "6109100000",
+                "origin": "CN",
+                "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                "importHsCode": "6109100012",
+                "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                "model": "TSHIRT-M",
+                "goodsDescs": [
+                  "普货"
+                ],
+                "productVersion": "1.0",
+                "certificateId": "DEMO-CERT-001",
+                "registryProductId": "DEMO-REG-001",
+                "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                "standardManufacturerProductId": "DEMO-STD-001"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiCommodityRequest"
             }
           }
         },
-        "description": "货物装箱明细"
+        "description": "货物装箱明细请求",
+        "example": [
+          {
+            "boxNo": "BOX001",
+            "actualWeight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001",
+            "commodities": [
+              {
+                "nameCn": "纯棉T恤",
+                "nameEn": "Cotton T-shirt",
+                "unitNetWeight": 0.2,
+                "sku": "TSHIRT-WHITE-M",
+                "asin": "B0DEMO0001",
+                "fnSku": "X00DEMO001",
+                "purposeCn": "日常穿着",
+                "purposeEn": "Daily wear",
+                "materialCn": "100%棉",
+                "materialEn": "100% cotton",
+                "quantity": 5,
+                "unit": 0,
+                "unitPrice": 20,
+                "brand": "DEMO",
+                "norms": "M / White",
+                "hsCode": "6109100000",
+                "origin": "CN",
+                "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                "importHsCode": "6109100012",
+                "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                "model": "TSHIRT-M",
+                "goodsDescs": [
+                  "普货"
+                ],
+                "productVersion": "1.0",
+                "certificateId": "DEMO-CERT-001",
+                "registryProductId": "DEMO-REG-001",
+                "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                "standardManufacturerProductId": "DEMO-STD-001"
+              }
+            ]
+          },
+          {
+            "boxNo": "BOX002",
+            "actualWeight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001",
+            "commodities": [
+              {
+                "nameCn": "纯棉T恤",
+                "nameEn": "Cotton T-shirt",
+                "unitNetWeight": 0.2,
+                "sku": "TSHIRT-WHITE-M",
+                "asin": "B0DEMO0001",
+                "fnSku": "X00DEMO001",
+                "purposeCn": "日常穿着",
+                "purposeEn": "Daily wear",
+                "materialCn": "100%棉",
+                "materialEn": "100% cotton",
+                "quantity": 5,
+                "unit": 0,
+                "unitPrice": 20,
+                "brand": "DEMO",
+                "norms": "M / White",
+                "hsCode": "6109100000",
+                "origin": "CN",
+                "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                "importHsCode": "6109100012",
+                "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                "model": "TSHIRT-M",
+                "goodsDescs": [
+                  "普货"
+                ],
+                "productVersion": "1.0",
+                "certificateId": "DEMO-CERT-001",
+                "registryProductId": "DEMO-REG-001",
+                "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                "standardManufacturerProductId": "DEMO-STD-001"
+              }
+            ]
+          }
+        ]
       },
       "CLCMRLLROO_OpenApiOrderResponse": {
         "type": "object",
@@ -1323,38 +1887,46 @@
           "id": {
             "type": "integer",
             "description": "运单id",
-            "format": "int64"
+            "format": "int64",
+            "example": 100000001
           },
           "customerName": {
             "type": "string",
-            "description": "客户名称"
+            "description": "客户名称",
+            "example": "示例贸易有限公司"
           },
           "customerNo": {
             "type": "string",
-            "description": "客户单号"
+            "description": "客户单号",
+            "example": "DEMO202611030001"
           },
           "trackNo": {
             "type": "string",
-            "description": "转单号"
+            "description": "转单号",
+            "example": "1ZDEMO000000000001"
           },
           "waybillNo": {
             "type": "string",
-            "description": "运单号"
+            "description": "运单号",
+            "example": "LMS202611030001"
           },
           "orderTime": {
             "type": "integer",
             "description": "下单时间(时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793671200000
           },
           "status": {
             "type": "integer",
             "description": "状态",
-            "format": "int32"
+            "format": "int32",
+            "example": 200
           },
           "fetchNoStatus": {
             "type": "integer",
             "description": "制单状态(0:未制单 1:制单中 2:成功)",
-            "format": "int32"
+            "format": "int32",
+            "example": 2
           },
           "fetchTrackNoErrorMsg": {
             "type": "string",
@@ -1362,56 +1934,70 @@
           },
           "productName": {
             "type": "string",
-            "description": "产品名称"
+            "description": "产品名称",
+            "example": "美国快递示例产品"
           },
           "productCode": {
             "type": "string",
-            "description": "产品代码"
+            "description": "产品代码",
+            "example": "US-EXPRESS-DEMO"
           },
           "pieceCount": {
             "type": "integer",
             "description": "件数",
-            "format": "int32"
+            "format": "int32",
+            "example": 2
           },
           "actualWeight": {
             "type": "number",
-            "description": "实重"
+            "description": "实重",
+            "example": 10
           },
           "volumeWeight": {
             "type": "number",
-            "description": "材积重"
+            "description": "材积重",
+            "example": 10
           },
           "chargeWeight": {
             "type": "number",
-            "description": "计费重"
+            "description": "计费重",
+            "example": 10
           },
           "orderRemark": {
             "type": "string",
-            "description": "下单备注(长度:[255])"
+            "description": "下单备注(长度:[255])",
+            "example": "普通货物，请妥善包装"
           },
           "tradeClause": {
             "type": "integer",
             "description": "贸易条款(0:DAP 1:DDP 2:EXW 3:FOB 4:CIF 5:CFR 6:DDU)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "needInsure": {
             "type": "integer",
             "description": "是否需要保险 0:否 1:是",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "declareType": {
             "type": "integer",
             "description": "报关方式(0:其他 1:单独报关 2:合并报关 3:买单报关)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "packageType": {
             "type": "integer",
             "description": "包裹类型(0:包裹(WPX) 1:文件(DOC) 2:包裹袋(PAK))",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "dangerousTypes": {
             "type": "array",
             "description": "危险品类型",
+            "example": [
+              0
+            ],
             "items": {
               "type": "integer",
               "description": "危险品类型",
@@ -1421,70 +2007,114 @@
           "goodsDescs": {
             "type": "array",
             "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+            "example": [
+              "普货"
+            ],
             "items": {
               "type": "string",
-              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)"
+              "description": "货物描述(带电、带磁等危险品服务，具体值咨询对接方)",
+              "example": "[\"普货\"]"
             }
           },
           "isPaperLess": {
             "type": "integer",
             "description": "是否无纸化(0:否 1:是)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "isSaturdayDelivery": {
             "type": "integer",
             "description": "是否周六派送(0:否(默认) 1:是)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "exportReason": {
             "type": "integer",
             "description": "出口原因",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "shipDate": {
             "type": "string",
-            "description": "寄件日期，格式yyyy-MM-dd"
+            "description": "寄件日期，格式yyyy-MM-dd",
+            "example": "2026-11-03"
           },
           "seventeenNo": {
             "type": "string",
-            "description": "17单号"
+            "description": "17单号",
+            "example": "DEMO202611030001"
           },
           "carrier": {
             "type": "string",
-            "description": "尾程服务商"
+            "description": "尾程服务商",
+            "example": "UPS"
           },
           "receiveWarehouseName": {
             "type": "string",
-            "description": "收货仓库name"
+            "description": "收货仓库name",
+            "example": "深圳示例仓"
           },
           "pieces": {
             "type": "array",
             "description": "子单信息",
+            "example": [
+              {
+                "id": 100000001,
+                "subNo": "1ZDEMO000000000002",
+                "trackNo": "1ZDEMO000000000001",
+                "weight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "boxNo": "BOX001",
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001"
+              },
+              {
+                "id": 100000002,
+                "subNo": "1ZDEMO000000000003",
+                "trackNo": "1ZDEMO000000000001",
+                "weight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "boxNo": "BOX002",
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLROO_OpenApiOrderDetailResponse$OpenApiPieceResponse"
             }
           },
           "originPort": {
             "type": "string",
-            "description": "起运地机场代码/目的港"
+            "description": "起运地机场代码/目的港",
+            "example": "SZX"
           },
           "destinationPort": {
             "type": "string",
-            "description": "目的地机场代码/目的港"
+            "description": "目的地机场代码/目的港",
+            "example": "LAX"
           },
           "receiveTime": {
             "type": "integer",
             "description": "收货时间(时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793685600000
           },
           "receiveGoodsType": {
             "type": "integer",
             "description": "货物类型",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "fbaShipmentId": {
             "type": "string",
-            "description": "fbaShipmentId"
+            "description": "FBA货件ID",
+            "example": "FBADEMO00001"
           },
           "recipient": {
             "$ref": "#/components/schemas/CLLROO_OpenApiOrderDetailResponse$OpenApiRecipientResponse"
@@ -1495,88 +2125,250 @@
           "fees": {
             "type": "array",
             "description": "费用信息",
+            "example": [
+              {
+                "subjectName": "运费",
+                "subjectCode": "FREIGHT",
+                "value": 35,
+                "currency": "USD",
+                "conversionValue": 35,
+                "formula": "10 * 3.5",
+                "remark": "示例订单，请按约定时效派送"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLROO_OpenApiOrderDetailResponse$OpenApiFeeResponse"
             }
           }
         },
-        "description": "运单"
+        "description": "开放接口运单详情响应",
+        "example": {
+          "id": 100000001,
+          "customerName": "示例贸易有限公司",
+          "customerNo": "DEMO202611030001",
+          "trackNo": "1ZDEMO000000000001",
+          "waybillNo": "LMS202611030001",
+          "orderTime": 1793671200000,
+          "status": 200,
+          "fetchNoStatus": 2,
+          "fetchTrackNoErrorMsg": "",
+          "productName": "美国快递示例产品",
+          "productCode": "US-EXPRESS-DEMO",
+          "pieceCount": 2,
+          "actualWeight": 10,
+          "volumeWeight": 10,
+          "chargeWeight": 10,
+          "orderRemark": "普通货物，请妥善包装",
+          "tradeClause": 0,
+          "needInsure": 0,
+          "declareType": 0,
+          "packageType": 0,
+          "dangerousTypes": [
+            0
+          ],
+          "goodsDescs": [
+            "普货"
+          ],
+          "isPaperLess": 1,
+          "isSaturdayDelivery": 0,
+          "exportReason": 0,
+          "shipDate": "2026-11-03",
+          "seventeenNo": "DEMO202611030001",
+          "carrier": "UPS",
+          "receiveWarehouseName": "深圳示例仓",
+          "pieces": [
+            {
+              "id": 100000001,
+              "subNo": "1ZDEMO000000000002",
+              "trackNo": "1ZDEMO000000000001",
+              "weight": 5,
+              "length": 40,
+              "width": 30,
+              "height": 25,
+              "boxNo": "BOX001",
+              "fbaShipmentId": "FBADEMO00001",
+              "fbaReferenceId": "1234567890",
+              "purchaseOrderNumber": "PO202611030001"
+            },
+            {
+              "id": 100000002,
+              "subNo": "1ZDEMO000000000003",
+              "trackNo": "1ZDEMO000000000001",
+              "weight": 5,
+              "length": 40,
+              "width": 30,
+              "height": 25,
+              "boxNo": "BOX002",
+              "fbaShipmentId": "FBADEMO00001",
+              "fbaReferenceId": "1234567890",
+              "purchaseOrderNumber": "PO202611030001"
+            }
+          ],
+          "originPort": "SZX",
+          "destinationPort": "LAX",
+          "receiveTime": 1793685600000,
+          "receiveGoodsType": 0,
+          "fbaShipmentId": "FBADEMO00001",
+          "recipient": {
+            "name": "Alex Smith",
+            "company": "Example Trading LLC",
+            "phone": "+1-213-555-0147",
+            "email": "recipient@example.com",
+            "countryCode": "US",
+            "state": "CA",
+            "city": "Los Angeles",
+            "postcode": "90001",
+            "address1": "123 Example Street",
+            "address2": "Suite 200",
+            "address3": "Building A",
+            "taxType1": 1,
+            "taxNo1": "12-3456789",
+            "taxType2": 0,
+            "taxNo2": "DEMO-TAX-002",
+            "suburb": "Florence",
+            "houseNumber": "123",
+            "fbaWarehouseCode": "ONT8",
+            "remoteLevel": "非偏远",
+            "addressType": 0,
+            "partyType": 1
+          },
+          "invoice": {
+            "declareValue": 200,
+            "declareCurrency": "USD",
+            "declareFreightFee": 30,
+            "declareOtherFee": 5,
+            "declareHandlingFee": 2,
+            "declareInsuranceFee": 3,
+            "declareTotalValue": 240,
+            "invoiceNumber": "INV202611030001",
+            "invoiceRemark": "Commercial invoice for cotton T-shirts"
+          },
+          "fees": [
+            {
+              "subjectName": "运费",
+              "subjectCode": "FREIGHT",
+              "value": 35,
+              "currency": "USD",
+              "conversionValue": 35,
+              "formula": "10 * 3.5",
+              "remark": "示例订单，请按约定时效派送"
+            }
+          ]
+        }
       },
       "CLLROO_OpenApiOrderDetailResponse$OpenApiFeeResponse": {
         "type": "object",
         "properties": {
           "subjectName": {
             "type": "string",
-            "description": "科目名称"
+            "description": "科目名称",
+            "example": "运费"
           },
           "subjectCode": {
             "type": "string",
-            "description": "科目代码"
+            "description": "科目代码",
+            "example": "FREIGHT"
           },
           "value": {
             "type": "number",
-            "description": "原币金额"
+            "description": "原币金额",
+            "example": 35
           },
           "currency": {
             "type": "string",
-            "description": "币种"
+            "description": "币种",
+            "example": "USD"
           },
           "conversionValue": {
             "type": "number",
-            "description": "维护本币金额"
+            "description": "维护本币金额",
+            "example": 35
           },
           "formula": {
             "type": "string",
-            "description": "公式"
+            "description": "公式",
+            "example": "10 * 3.5"
           },
           "remark": {
             "type": "string",
-            "description": "备注"
+            "description": "备注",
+            "example": "示例订单，请按约定时效派送"
           }
         },
-        "description": "费用"
+        "description": "费用响应",
+        "example": [
+          {
+            "subjectName": "运费",
+            "subjectCode": "FREIGHT",
+            "value": 35,
+            "currency": "USD",
+            "conversionValue": 35,
+            "formula": "10 * 3.5",
+            "remark": "示例订单，请按约定时效派送"
+          }
+        ]
       },
       "CLLROO_OpenApiOrderDetailResponse$OpenApiInvoiceResponse": {
         "type": "object",
         "properties": {
           "declareValue": {
             "type": "number",
-            "description": "申报价值"
+            "description": "申报价值",
+            "example": 200
           },
           "declareCurrency": {
             "type": "string",
-            "description": "申报币种"
+            "description": "申报币种",
+            "example": "USD"
           },
           "declareFreightFee": {
             "type": "number",
-            "description": "申报运费"
+            "description": "申报运费",
+            "example": 30
           },
           "declareOtherFee": {
             "type": "number",
-            "description": "申报其他费用"
+            "description": "申报其他费用",
+            "example": 5
           },
           "declareHandlingFee": {
             "type": "number",
-            "description": "申报手续费"
+            "description": "申报手续费",
+            "example": 2
           },
           "declareInsuranceFee": {
             "type": "number",
-            "description": "申报保险费用"
+            "description": "申报保险费用",
+            "example": 3
           },
           "declareTotalValue": {
             "type": "number",
-            "description": "申报总金额"
+            "description": "申报总金额",
+            "example": 240
           },
           "invoiceNumber": {
             "type": "string",
-            "description": "发票号码"
+            "description": "发票号码",
+            "example": "INV202611030001"
           },
           "invoiceRemark": {
             "type": "string",
-            "description": "发票备注"
+            "description": "发票备注",
+            "example": "Commercial invoice for cotton T-shirts"
           }
         },
-        "description": "发票信息"
+        "description": "发票信息响应",
+        "example": {
+          "declareValue": 200,
+          "declareCurrency": "USD",
+          "declareFreightFee": 30,
+          "declareOtherFee": 5,
+          "declareHandlingFee": 2,
+          "declareInsuranceFee": 3,
+          "declareTotalValue": 240,
+          "invoiceNumber": "INV202611030001",
+          "invoiceRemark": "Commercial invoice for cotton T-shirts"
+        }
       },
       "CLLROO_OpenApiOrderDetailResponse$OpenApiPieceResponse": {
         "type": "object",
@@ -1584,50 +2376,89 @@
           "id": {
             "type": "integer",
             "description": "子单id",
-            "format": "int64"
+            "format": "int64",
+            "example": 100000001
           },
           "subNo": {
             "type": "string",
-            "description": "子单号"
+            "description": "子单号",
+            "example": "1ZDEMO000000000002"
           },
           "trackNo": {
             "type": "string",
-            "description": "子转单号"
+            "description": "子转单号",
+            "example": "1ZDEMO000000000001"
           },
           "weight": {
             "type": "number",
-            "description": "实重"
+            "description": "实重",
+            "example": 5
           },
           "length": {
             "type": "number",
-            "description": "长度"
+            "description": "长度",
+            "example": 40
           },
           "width": {
             "type": "number",
-            "description": "宽度"
+            "description": "宽度",
+            "example": 30
           },
           "height": {
             "type": "number",
-            "description": "高度"
+            "description": "高度",
+            "example": 25
           },
           "boxNo": {
             "type": "string",
-            "description": "箱号(客户自定义)"
+            "description": "箱号(客户自定义)",
+            "example": "BOX001"
           },
           "fbaShipmentId": {
             "type": "string",
-            "description": "FBA货件ID(FBA shipmentId)"
+            "description": "FBA货件ID(FBA shipmentId)",
+            "example": "FBADEMO00001"
           },
           "fbaReferenceId": {
             "type": "string",
-            "description": "FBA内部参考ID(FBA Amazon Reference ID)"
+            "description": "FBA内部参考ID(FBA Amazon Reference ID)",
+            "example": "1234567890"
           },
           "purchaseOrderNumber": {
             "type": "string",
-            "description": "PO预约号"
+            "description": "PO预约号",
+            "example": "PO202611030001"
           }
         },
-        "description": "单件明细"
+        "description": "单件明细响应",
+        "example": [
+          {
+            "id": 100000001,
+            "subNo": "1ZDEMO000000000002",
+            "trackNo": "1ZDEMO000000000001",
+            "weight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "boxNo": "BOX001",
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001"
+          },
+          {
+            "id": 100000002,
+            "subNo": "1ZDEMO000000000003",
+            "trackNo": "1ZDEMO000000000001",
+            "weight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "boxNo": "BOX002",
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001"
+          }
+        ]
       },
       "CLLROO_OpenApiOrderDetailResponse$OpenApiRecipientResponse": {
         "required": [
@@ -1638,94 +2469,138 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "姓名"
+            "description": "姓名",
+            "example": "Alex Smith"
           },
           "company": {
             "type": "string",
-            "description": "公司"
+            "description": "公司",
+            "example": "Example Trading LLC"
           },
           "phone": {
             "type": "string",
-            "description": "电话"
+            "description": "电话",
+            "example": "+1-213-555-0147"
           },
           "email": {
             "type": "string",
-            "description": "邮箱"
+            "description": "邮箱",
+            "example": "recipient@example.com"
           },
           "countryCode": {
             "type": "string",
-            "description": "国家代码"
+            "description": "国家代码",
+            "example": "US"
           },
           "state": {
             "type": "string",
-            "description": "省"
+            "description": "省",
+            "example": "CA"
           },
           "city": {
             "type": "string",
-            "description": "市"
+            "description": "市",
+            "example": "Los Angeles"
           },
           "postcode": {
             "type": "string",
-            "description": "邮编"
+            "description": "邮编",
+            "example": "90001"
           },
           "address1": {
             "type": "string",
-            "description": "地址1"
+            "description": "地址1",
+            "example": "123 Example Street"
           },
           "address2": {
             "type": "string",
-            "description": "地址2"
+            "description": "地址2",
+            "example": "Suite 200"
           },
           "address3": {
             "type": "string",
-            "description": "地址3"
+            "description": "地址3",
+            "example": "Building A"
           },
           "taxType1": {
             "type": "integer",
             "description": "税号类型1(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST)",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           },
           "taxNo1": {
             "type": "string",
-            "description": "税号1"
+            "description": "税号1",
+            "example": "12-3456789"
           },
           "taxType2": {
             "type": "integer",
             "description": "税号类型2(0:VAT 1:EIN 2:GSIN 3:IEC 4:EORI 5:IOSS 6:TAX 7:NIF 8:ABN 9:TFN 10:GST)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "taxNo2": {
             "type": "string",
-            "description": "税号2"
+            "description": "税号2",
+            "example": "DEMO-TAX-002"
           },
           "suburb": {
             "type": "string",
-            "description": "郊区"
+            "description": "郊区",
+            "example": "Florence"
           },
           "houseNumber": {
             "type": "string",
-            "description": "门牌号"
+            "description": "门牌号",
+            "example": "123"
           },
           "fbaWarehouseCode": {
             "type": "string",
-            "description": "FBA仓库代码"
+            "description": "FBA仓库代码",
+            "example": "ONT8"
           },
           "remoteLevel": {
             "type": "string",
-            "description": "偏远等级"
+            "description": "偏远等级",
+            "example": "非偏远"
           },
           "addressType": {
             "type": "integer",
             "description": "地址类型(1:商业 2:住宅 3:混合 4:未知 5:FBA)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "partyType": {
             "type": "integer",
             "description": "贸易主体类型 1:企业/机构 2:个人/自然人",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           }
         },
-        "description": "收件人"
+        "description": "收件人响应",
+        "example": {
+          "name": "Alex Smith",
+          "company": "Example Trading LLC",
+          "phone": "+1-213-555-0147",
+          "email": "recipient@example.com",
+          "countryCode": "US",
+          "state": "CA",
+          "city": "Los Angeles",
+          "postcode": "90001",
+          "address1": "123 Example Street",
+          "address2": "Suite 200",
+          "address3": "Building A",
+          "taxType1": 1,
+          "taxNo1": "12-3456789",
+          "taxType2": 0,
+          "taxNo2": "DEMO-TAX-002",
+          "suburb": "Florence",
+          "houseNumber": "123",
+          "fbaWarehouseCode": "ONT8",
+          "remoteLevel": "非偏远",
+          "addressType": 0,
+          "partyType": 1
+        }
       },
       "CLLROO_OpenApiOrderResponse": {
         "type": "object",
@@ -1733,37 +2608,44 @@
           "id": {
             "type": "integer",
             "description": "运单id",
-            "format": "int64"
+            "format": "int64",
+            "example": 100000001
           },
           "waybillNo": {
             "type": "string",
-            "description": "运单号"
+            "description": "运单号",
+            "example": "LMS202611030001"
           },
           "trackNo": {
             "type": "string",
-            "description": "转单号"
+            "description": "转单号",
+            "example": "1ZDEMO000000000001"
           },
           "pieceBarcodeUrl": {
             "type": "string",
-            "description": "入仓标签(链接有效期5分钟)"
+            "description": "入仓标签(链接有效期5分钟)",
+            "example": "https://files.example.com/DEMO202611030001/barcode.pdf"
           },
           "labelUrl": {
             "type": "string",
-            "description": "转单面单(链接有效期5分钟)"
+            "description": "转单面单(链接有效期5分钟)",
+            "example": "https://files.example.com/DEMO202611030001/label.pdf"
           },
           "invoiceUrl": {
             "type": "string",
-            "description": "发票(链接有效期5分钟)"
+            "description": "发票(链接有效期5分钟)",
+            "example": "https://files.example.com/DEMO202611030001/invoice.pdf"
           },
           "copyUrl": {
             "type": "string",
-            "description": "copy联(仅ups有效，链接有效期5分钟)"
+            "description": "copy联(仅ups有效，链接有效期5分钟)",
+            "example": "https://files.example.com/DEMO202611030001/copy.pdf"
           },
           "info": {
             "$ref": "#/components/schemas/CLLROO_OpenApiOrderDetailResponse"
           }
         },
-        "description": "下单response"
+        "description": "开放接口下单响应"
       },
       "CLLRO_OpenApiQueryTrackRequest": {
         "required": [
@@ -1776,18 +2658,23 @@
             "minItems": 0,
             "type": "array",
             "description": "单号",
+            "example": [
+              "LMS202611030001"
+            ],
             "items": {
               "type": "string",
-              "description": "单号"
+              "description": "单号",
+              "example": "[\"LMS202611030001\"]"
             }
           },
           "noType": {
             "type": "integer",
             "description": "单号类型(0:运单号 1:客户单号 2:转单号 12：17单号)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           }
         },
-        "description": "轨迹查询Request"
+        "description": "轨迹查询请求"
       },
       "CLCMRULLLROO_OpenApiTrackResponse": {
         "type": "object",
@@ -1816,20 +2703,17 @@
         "properties": {
           "no": {
             "type": "string",
-            "description": "单号"
+            "description": "单号",
+            "example": "LMS202611030001"
           },
           "detail": {
             "$ref": "#/components/schemas/CLLROO_OpenApiOrderDetailResponse"
           },
-          "estimatedDeliveryTimeFrom": {
+          "estimatedDeliveryAt": {
             "type": "integer",
-            "description": "预计最早签收时间",
-            "format": "int64"
-          },
-          "estimatedDeliveryTimeTo": {
-            "type": "integer",
-            "description": "预计最晚签收时间",
-            "format": "int64"
+            "description": "预计签收时间",
+            "format": "int64",
+            "example": 1794103200000
           },
           "timeCost": {
             "$ref": "#/components/schemas/CLLROO_OpenApiTrackTimeCostResponse"
@@ -1840,16 +2724,25 @@
           "trackItems": {
             "type": "array",
             "description": "轨迹列表",
+            "example": [
+              {
+                "time": 1794103200000,
+                "status": 200,
+                "description": "Delivered, signed by recipient",
+                "location": "Los Angeles, CA, US"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLROO_OpenApiTrackResponse$TrackItem"
             }
           },
           "locationUrl": {
             "type": "string",
-            "description": "定位Url"
+            "description": "定位Url",
+            "example": "https://tracking.example.com/DEMO202611030001"
           }
         },
-        "description": "查询轨迹Response"
+        "description": "查询轨迹响应"
       },
       "CLLROO_OpenApiTrackResponse$TrackItem": {
         "type": "object",
@@ -1857,23 +2750,35 @@
           "time": {
             "type": "integer",
             "description": "轨迹时间",
-            "format": "int64"
+            "format": "int64",
+            "example": 1794103200000
           },
           "status": {
             "type": "integer",
             "description": "节点状态(100:待提取 110:已提取(PickedUp) 112:已离港(Departure) 114:已到港(Arrival) 120:运输途中(InTransit) 130:派送途中(OutForDelivery) 140:到达待取(AvailableForPickup) 150:投递失败(DeliveryFailure)  200:已签收(Delivered) 210:待退货(Returning) 220:已退货(Returned) 230:异常(Exception) 240:已完结)",
-            "format": "int32"
+            "format": "int32",
+            "example": 200
           },
           "description": {
             "type": "string",
-            "description": "描述信息"
+            "description": "描述信息",
+            "example": "Delivered, signed by recipient"
           },
           "location": {
             "type": "string",
-            "description": "位置信息"
+            "description": "位置信息",
+            "example": "Los Angeles, CA, US"
           }
         },
-        "description": "轨迹信息"
+        "description": "轨迹信息",
+        "example": [
+          {
+            "time": 1794103200000,
+            "status": 200,
+            "description": "Delivered, signed by recipient",
+            "location": "Los Angeles, CA, US"
+          }
+        ]
       },
       "CLLROO_OpenApiTrackTimeCostResponse": {
         "type": "object",
@@ -1881,30 +2786,42 @@
           "pickUpTimeCost": {
             "type": "integer",
             "description": "提货时效",
-            "format": "int64"
+            "format": "int64",
+            "example": 86400000
           },
           "warehouseTimeCost": {
             "type": "integer",
             "description": "仓库时效",
-            "format": "int64"
+            "format": "int64",
+            "example": 86400000
           },
           "headTimeCost": {
             "type": "integer",
             "description": "头程时效",
-            "format": "int64"
+            "format": "int64",
+            "example": 86400000
           },
           "clearanceTimeCost": {
             "type": "integer",
             "description": "清关时效",
-            "format": "int64"
+            "format": "int64",
+            "example": 86400000
           },
           "deliverTimeCost": {
             "type": "integer",
             "description": "派送时效",
-            "format": "int64"
+            "format": "int64",
+            "example": 86400000
           }
         },
-        "description": "时效Response"
+        "description": "时效响应",
+        "example": {
+          "pickUpTimeCost": 86400000,
+          "warehouseTimeCost": 86400000,
+          "headTimeCost": 86400000,
+          "clearanceTimeCost": 86400000,
+          "deliverTimeCost": 86400000
+        }
       },
       "CLLRO_OpenApiPrintRequest": {
         "required": [
@@ -1916,25 +2833,30 @@
         "properties": {
           "type": {
             "type": "integer",
-            "description": "文件类型(100:转单标签 110:转单发票 120:备份联 130:入仓标签 140:供应商入仓标签)",
-            "format": "int32"
+            "description": "文件类型(100:转单标签 110:转单发票 120:备份联 130:入仓标签 304:联邦副联)",
+            "format": "int32",
+            "example": 100
           },
           "no": {
             "type": "string",
-            "description": "单号"
+            "description": "单号",
+            "example": "LMS202611030001"
           },
           "noType": {
             "type": "integer",
             "description": "单号类型(0:运单号 1:客户单号 2:转单号)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "copyCount": {
             "maximum": 10,
             "type": "integer",
             "description": "份数",
-            "format": "int32"
+            "format": "int32",
+            "example": 1
           }
-        }
+        },
+        "description": "开放接口打印请求"
       },
       "CLCMRLLROO_OpenApiPrintResponse": {
         "type": "object",
@@ -1959,10 +2881,11 @@
         "properties": {
           "url": {
             "type": "string",
-            "description": "url"
+            "description": "访问地址",
+            "example": "https://files.example.com/DEMO202611030001/label.pdf"
           }
         },
-        "description": "打印response"
+        "description": "打印响应"
       },
       "CLLRO_OpenApiOrderDetailRequest": {
         "required": [
@@ -1976,15 +2899,17 @@
           },
           "no": {
             "type": "string",
-            "description": "单号"
+            "description": "单号",
+            "example": "LMS202611030001"
           },
           "noType": {
             "type": "integer",
             "description": "单号类型(0:运单号 1:客户单号 2:转单号)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           }
         },
-        "description": "订单详情Request"
+        "description": "订单详情请求"
       },
       "CLCMRLLROO_OpenApiOrderDetailResponse": {
         "type": "object",
@@ -2022,17 +2947,18 @@
             "maxLength": 100,
             "type": "string",
             "description": "客户单号",
-            "example": "TEST000000001"
+            "example": "DEMO202611030001"
           },
           "customerExtraNo": {
             "maxLength": 100,
             "type": "string",
             "description": "客户额外单号",
-            "example": "TEST000000001"
+            "example": "PO202611030001"
           },
           "bookingConfirmationNumber": {
             "type": "string",
-            "description": "大货预约编号(用于FedEx IPF、IEF等Freight服务)"
+            "description": "大货预约编号(用于FedEx IPF、IEF等Freight服务)",
+            "example": "DEMO-FRT-20261103-001"
           },
           "info": {
             "$ref": "#/components/schemas/CLLRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest"
@@ -2052,7 +2978,8 @@
           "mode": {
             "type": "integer",
             "description": "模式(0:同时制单 1:仅下单)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           },
           "documentOption": {
             "$ref": "#/components/schemas/CLLRO_OpenApiDocumentOptionRequest"
@@ -2060,7 +2987,7 @@
           "ecomPlatformType": {
             "type": "string",
             "description": "电商平台类型(DHGATE:敦煌 WISH:wish EBAY:ebay ALI-EXPRESS:速卖通 JD:京东 TEMU:TEMU TIKTOK:tiktok AMAZON:亚马逊 SHOPEE:虾皮 LAZADA:来赞达 SHEIN:希音 SHOPIFY:SHOPIFY WALMART:沃尔玛 OZON:OZON JOOM:JOOM ALIBABA:阿里巴巴国际站 MERCADO:美客多 ETSY:ETSY SHOPLAZZA:店匠 WOOCOMMERCE:WOOCOMMERCE SHOPYY:SHOPYY UEESHOP:UEESHOP SHOPLINE:SHOPLINE CDISCOUNT:CDISCOUNT DARAZ:达拉兹 COUPANG:酷澎 ALLEGRO:ALLEGRO JUMIA:JUMIA MAGENTO:MAGENTO BIGCOMMERCE:BIGCOMMERCE KILIMALL:KILIMALL GEARBEST:GEARBEST TIKI:TIKI SHOPBASE:SHOPBASE KAUFLAND:KAUFLAND FUNPINPIN:FUNPINPIN ALLVALUE:有赞 SHOPEXP:shopexpress FNAC:FNAC RAKUTEN:乐天 QOO10:趣天 1688:1688 OTHER:其他来源(例如:手工订单))",
-            "example": "JD"
+            "example": "AMAZON"
           },
           "ecomErpType": {
             "type": "string",
@@ -2070,20 +2997,24 @@
           "ecomEarliestTimeBuyLabel": {
             "type": "integer",
             "description": "电商最早可买单时间(毫秒时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793671200000
           },
           "ecomSendDealLineTime": {
             "type": "integer",
             "description": "电商发货截止时间(毫秒时间戳)",
-            "format": "int64"
+            "format": "int64",
+            "example": 1793844000000
           },
           "ecomBuyLabelAreaCode": {
             "type": "string",
-            "description": "电商买单仓库代码"
+            "description": "电商买单仓库代码",
+            "example": "US"
           },
           "ecomBuyLabelChannel": {
             "type": "string",
-            "description": "电商买单渠道"
+            "description": "电商买单渠道",
+            "example": "US-AIR-DEMO"
           },
           "ecomInfo": {
             "type": "object",
@@ -2095,15 +3026,28 @@
             },
             "additionalProperties": {
               "type": "object",
-              "description": "电商信息"
+              "description": "电商信息",
+              "example": {
+                "ecomBuyLabelUrl": "https://files.example.com/DEMO202611030001/label.pdf"
+              }
             },
-            "description": "电商信息"
+            "description": "电商信息",
+            "example": {
+              "ecomBuyLabelUrl": "https://files.example.com/DEMO202611030001/label.pdf"
+            }
           },
           "files": {
             "maxItems": 4,
             "minItems": 0,
             "type": "array",
             "description": "文件信息",
+            "example": [
+              {
+                "type": 0,
+                "fileName": "commercial-invoice.pdf",
+                "base64": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggODUgPj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA1MCA3NjAgVGQgKERFTU8gQ09NTUVSQ0lBTCBJTlZPSUNFIC0gSU5WMjAyNjExMDMwMDAxIC0gVVNEIDIwMC4wMCkgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDMxMSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQ0NgolJUVPRgo="
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiOrderRequest$OpenApiFileRequest"
             }
@@ -2111,6 +3055,28 @@
           "pieces": {
             "type": "array",
             "description": "单件信息",
+            "example": [
+              {
+                "boxNo": "BOX001",
+                "weight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001"
+              },
+              {
+                "boxNo": "BOX002",
+                "weight": 5,
+                "length": 40,
+                "width": 30,
+                "height": 25,
+                "fbaShipmentId": "FBADEMO00001",
+                "fbaReferenceId": "1234567890",
+                "purchaseOrderNumber": "PO202611030001"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiExpressOrderRequest$OpenApiOrderPieceRequest"
             }
@@ -2118,61 +3084,126 @@
           "commodities": {
             "type": "array",
             "description": "商品信息",
+            "example": [
+              {
+                "nameCn": "纯棉T恤",
+                "nameEn": "Cotton T-shirt",
+                "unitNetWeight": 0.2,
+                "sku": "TSHIRT-WHITE-M",
+                "asin": "B0DEMO0001",
+                "fnSku": "X00DEMO001",
+                "purposeCn": "日常穿着",
+                "purposeEn": "Daily wear",
+                "materialCn": "100%棉",
+                "materialEn": "100% cotton",
+                "quantity": 10,
+                "unit": 0,
+                "unitPrice": 20,
+                "brand": "DEMO",
+                "norms": "M / White",
+                "hsCode": "6109100000",
+                "origin": "CN",
+                "link": "https://files.example.com/DEMO202611030001/label.pdf",
+                "imageUrl": "https://files.example.com/products/cotton-t-shirt.jpg",
+                "importHsCode": "6109100012",
+                "declareElement": "品牌:DEMO;材质:100%棉;用途:日常穿着",
+                "model": "TSHIRT-M",
+                "goodsDescs": [
+                  "普货"
+                ],
+                "productVersion": "1.0",
+                "certificateId": "DEMO-CERT-001",
+                "registryProductId": "DEMO-REG-001",
+                "merchantProductId": "DEMO-TSHIRT-WHITE-M",
+                "nonStandardManufacturerProductId": "DEMO-STYLE-001",
+                "standardManufacturerProductId": "DEMO-STD-001"
+              }
+            ],
             "items": {
               "$ref": "#/components/schemas/CLLRO_OpenApiCommodityRequest"
             }
           }
         },
-        "description": "快递下单Request"
+        "description": "快递下单请求"
       },
       "CLLRO_OpenApiExpressOrderRequest$OpenApiOrderPieceRequest": {
         "type": "object",
         "properties": {
           "boxNo": {
             "type": "string",
-            "description": "箱号(客户自定义)"
+            "description": "箱号(客户自定义)",
+            "example": "BOX001"
           },
           "weight": {
             "minimum": 0,
             "exclusiveMinimum": false,
             "type": "number",
-            "description": "实重"
+            "description": "实重",
+            "example": 5
           },
           "length": {
             "minimum": 0,
             "exclusiveMinimum": false,
             "type": "number",
-            "description": "长度"
+            "description": "长度",
+            "example": 40
           },
           "width": {
             "minimum": 0,
             "exclusiveMinimum": false,
             "type": "number",
-            "description": "宽度"
+            "description": "宽度",
+            "example": 30
           },
           "height": {
             "minimum": 0,
             "exclusiveMinimum": false,
             "type": "number",
-            "description": "高度"
+            "description": "高度",
+            "example": 25
           },
           "fbaShipmentId": {
             "maxLength": 50,
             "type": "string",
-            "description": "FBA货件ID(FBA shipmentId)"
+            "description": "FBA货件ID(FBA shipmentId)",
+            "example": "FBADEMO00001"
           },
           "fbaReferenceId": {
             "maxLength": 100,
             "type": "string",
-            "description": "FBA内部参考ID(FBA Amazon Reference ID)"
+            "description": "FBA内部参考ID(FBA Amazon Reference ID)",
+            "example": "1234567890"
           },
           "purchaseOrderNumber": {
             "maxLength": 100,
             "type": "string",
-            "description": "PO预约号"
+            "description": "PO预约号",
+            "example": "PO202611030001"
           }
         },
-        "description": "单件信息"
+        "description": "单件信息请求",
+        "example": [
+          {
+            "boxNo": "BOX001",
+            "weight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001"
+          },
+          {
+            "boxNo": "BOX002",
+            "weight": 5,
+            "length": 40,
+            "width": 30,
+            "height": 25,
+            "fbaShipmentId": "FBADEMO00001",
+            "fbaReferenceId": "1234567890",
+            "purchaseOrderNumber": "PO202611030001"
+          }
+        ]
       },
       "CLLRO_OpenApiDeleteOrderRequest": {
         "required": [
@@ -2187,15 +3218,17 @@
           },
           "no": {
             "type": "string",
-            "description": "单号"
+            "description": "单号",
+            "example": "LMS202611030001"
           },
           "noType": {
             "type": "integer",
             "description": "单号类型(0:运单号 1:客户单号 2:转单号)",
-            "format": "int32"
+            "format": "int32",
+            "example": 0
           }
         },
-        "description": "删除订单Request"
+        "description": "删除订单请求"
       },
       "CLCMRL_Integer": {
         "type": "object",

@@ -4,6 +4,27 @@
 当前快照包含 **6 个服务、27 个业务接口**，另有 **3 个本地文档工具**。
 使用官方 MCP Python SDK 2.x，支持 stdio 和 Streamable HTTP。
 
+## 客户直接使用：链路物流助手 Skill
+
+客户可通过自然语言查价、下单、查运单与轨迹、获取标签、查询余额和维护订单。
+
+- [客户使用指南与连接配置](https://github.com/xiaolushanling/link-skill/blob/main/docs/customer-guide.md)
+- [下载客户 Skill v0.2.0](https://github.com/xiaolushanling/link-skill/raw/refs/heads/main/downloads/link-logistics-assistant-v0.2.0.zip)
+- [查看完整 Skill](https://github.com/xiaolushanling/link-skill/blob/main/skills/link-logistics-assistant/SKILL.md)
+- [豆包适配说明](https://github.com/xiaolushanling/link-skill/blob/main/platforms/doubao/README.md)
+
+客户连接使用 `LINK_PROFILE=customer` 和 [客户连接配置](https://github.com/xiaolushanling/link-skill/blob/main/mcp-config.customer.example.json)。
+此模式提供 22 个客户业务工具及 3 个文档工具，隐藏客户身份参数并拒绝调用方覆盖凭证。
+尚未发布到 Git 的本地版本使用 [客户本地连接配置](https://github.com/xiaolushanling/link-skill/blob/main/mcp-config.customer.local.example.json)，修改其中的项目路径和凭证。
+现有 `full` 模式保持默认，仍提供全部 27 个业务接口及 3 个文档工具。
+客户凭证必须拥有相应数据权限；业务服务仍须验证运单归属。此版本不提供多客户公共登录中心。
+
+技能包只包含业务工作流，不包含客户凭证。目标客户端还需要可用的 MCP 连接。
+豆包适配源包不是完整官方应用插件提审包，平台账号和真机联调状态见适配说明。
+
+Skill 源码、打包脚本、客户指南和下载文件统一由独立 [link-skill 仓库](https://github.com/xiaolushanling/link-skill) 维护。
+本仓库只维护 MCP 执行层、客户工具范围及参数校验。
+
 ## 通过 Git 使用
 
 与 [UPS MCP](https://github.com/UPS-API/ups-mcp) 的分发方式一致，客户端可通过 `uvx` 从 Git 仓库安装并启动。
@@ -192,6 +213,7 @@ stdio 启动后等待 MCP 客户端通信，终端没有欢迎消息属于正常
 | `LINK_API_BASE_URL` | `https://demo.linkl.com.cn/api` | 网关根地址，包含 `/api`，不含服务路径 |
 | `LINK_TOKEN` | 空 | 上游 `linkToken`，业务调用时检查 |
 | `LINK_CUSTOMER_KEY` | 空 | 可选客户凭证补入 |
+| `LINK_PROFILE` | `full` | `customer` 固定使用配置的客户身份，仅开放客户业务白名单；业务调用需配置客户密钥 |
 | `LINK_SERVICES` | 空 | 逗号分隔的服务代码，空值启用全部 |
 | `LINK_READ_ONLY` | `false` | `true` 时仅暴露 11 个查询业务工具和 3 个文档工具 |
 | `LINK_TIMEOUT_SECONDS` | `30` | 请求超时秒数 |
@@ -220,6 +242,12 @@ stdio 启动后等待 MCP 客户端通信，终端没有欢迎消息属于正常
 .\.venv\Scripts\python.exe -m build
 ```
 
-测试使用模拟上游，覆盖请求地址、凭证补入、原始文本、嵌套校验、错误、只读过滤、分页及 MCP 握手。
-`evaluations/document-workflows.xml` 提供 10 个无需业务凭证的文档评估场景。
+测试使用模拟上游，覆盖客户工具白名单、固定身份注入、禁止切换客户、嵌套校验、写入超时、
+只读过滤、大型模型分段阅读及 MCP 握手。
+[客户场景验收表](https://github.com/xiaolushanling/link-skill/blob/main/docs/customer-acceptance.md) 提供 23 个目标 AI 客户端对话场景；
+工具层自动化测试不能替代实际模型与客户端的对话验收。
 离线测试不证明真实账号权限、下单、计费、打印或外部供应商行为，联调时使用对应环境凭证。
+
+下单模型较大时，可用 `link_describe_api` 的 `section=summary` 查看字段目录，
+再指定 `section=input` 和 `field_path=body.recipient` 等路径获取完整子模型。
+默认 `section=all` 保持原行为；分段查看仅读本地文档，不会重复发送业务请求。

@@ -131,7 +131,7 @@
             "description": "密码"
           }
         },
-        "description": "oauth登录Request"
+        "description": "OAuth登录请求"
       },
       "CLCMRLURO_OpenApiOauthLoginResponse": {
         "type": "object",
@@ -159,11 +159,11 @@
             "description": "重定向地址"
           }
         },
-        "description": "sso登录"
+        "description": "单点登录登录响应"
       },
       "CLURO_OpenApiReceiveWarehouseRequest": {
         "type": "object",
-        "description": "收件仓库Request"
+        "description": "收件仓库请求"
       },
       "CLCMRULLURO_OpenApiWarehouseResponse": {
         "type": "object",
@@ -211,11 +211,11 @@
             "description": "联系人"
           }
         },
-        "description": "仓库Response"
+        "description": "仓库响应"
       },
       "CLURO_OpenApiOwmsWarehouseRequest": {
         "type": "object",
-        "description": "海外仓仓库Request"
+        "description": "海外仓仓库请求"
       }
     }
   },

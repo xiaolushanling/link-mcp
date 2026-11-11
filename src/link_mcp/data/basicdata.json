@@ -133,7 +133,8 @@
             "type": "string",
             "description": "邮编(长度:[20])"
           }
-        }
+        },
+        "description": "偏远验证请求"
       },
       "CLBRO_OpenApiValidateRemoteResponse": {
         "type": "object",
@@ -148,7 +149,7 @@
             "description": "偏远等级"
           }
         },
-        "description": "数据结果"
+        "description": "偏远验证响应"
       },
       "CLCMRULLBRO_OpenApiValidateRemoteResponse": {
         "type": "object",
@@ -209,7 +210,8 @@
             "type": "string",
             "description": "地址3(长度:[255])"
           }
-        }
+        },
+        "description": "地址验证请求"
       },
       "CLBRO_OpenApiValidateAddressResponse": {
         "type": "object",
@@ -260,7 +262,7 @@
             "description": "偏远等级"
           }
         },
-        "description": "数据结果"
+        "description": "地址验证响应"
       },
       "CLCMRULLBRO_OpenApiValidateAddressResponse": {
         "type": "object",
@@ -302,7 +304,8 @@
             "type": "string",
             "description": "邮编(长度:[20])"
           }
-        }
+        },
+        "description": "城市邮编查询请求"
       },
       "CLBRO_OpenApiCityPostCodeSearchResponse": {
         "type": "object",
@@ -331,7 +334,7 @@
             }
           }
         },
-        "description": "数据结果"
+        "description": "城市邮编查询响应"
       },
       "CLCMRULLBRO_OpenApiCityPostCodeSearchResponse": {
         "type": "object",

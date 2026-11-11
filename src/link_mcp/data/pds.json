@@ -238,7 +238,8 @@
             "description": "份数",
             "format": "int32"
           }
-        }
+        },
+        "description": "开放接口打印请求"
       },
       "CLCMRLPRO_OpenApiPrintResponse": {
         "type": "object",
@@ -263,10 +264,10 @@
         "properties": {
           "url": {
             "type": "string",
-            "description": "url"
+            "description": "访问地址"
           }
         },
-        "description": "打印response"
+        "description": "打印响应"
       },
       "CLPRO_OpenApiCommodityRequest": {
         "type": "object",
@@ -358,7 +359,7 @@
             "description": "型号(长度:[255])"
           }
         },
-        "description": "商品信息"
+        "description": "商品信息请求"
       },
       "CLPRO_OpenApiDocumentOptionRequest": {
         "type": "object",
@@ -379,7 +380,7 @@
             "format": "int32"
           }
         },
-        "description": "文档属性"
+        "description": "文档属性请求"
       },
       "CLPRO_OpenApiOrderRequest": {
         "required": [
@@ -450,7 +451,7 @@
             "$ref": "#/components/schemas/CLPRO_OpenApiDocumentOptionRequest"
           }
         },
-        "description": "下单Request"
+        "description": "开放接口下单请求"
       },
       "CLPRO_OpenApiOrderRequest$OpenApiWaybillInfoRequest": {
         "required": [
@@ -484,7 +485,7 @@
             "format": "int32"
           }
         },
-        "description": "运单信息"
+        "description": "运单信息请求"
       },
       "CLPRO_OpenApiPieceRequest": {
         "required": [
@@ -539,7 +540,7 @@
             }
           }
         },
-        "description": "单件信息"
+        "description": "开放接口单件信息请求"
       },
       "CLPRO_OpenApiRecipientRequest": {
         "required": [
@@ -633,7 +634,7 @@
             "description": "证件号码"
           }
         },
-        "description": "收件人"
+        "description": "收件人请求"
       },
       "CLPRO_OpenApiSenderRequest": {
         "type": "object",
@@ -704,7 +705,7 @@
             "format": "int32"
           }
         },
-        "description": "寄件人"
+        "description": "发件人请求"
       },
       "CLCMRLPRO_OpenApiOrderResponse": {
         "type": "object",
@@ -844,7 +845,7 @@
             }
           }
         },
-        "description": "运单"
+        "description": "开放接口运单详情响应"
       },
       "CLPRO_OpenApiOrderDetailResponse$OpenApiFeeResponse": {
         "type": "object",
@@ -878,7 +879,7 @@
             "description": "备注"
           }
         },
-        "description": "费用"
+        "description": "费用响应"
       },
       "CLPRO_OpenApiOrderDetailResponse$OpenApiPieceResponse": {
         "type": "object",
@@ -917,7 +918,7 @@
             "description": "高度"
           }
         },
-        "description": "单件明细"
+        "description": "单件明细响应"
       },
       "CLPRO_OpenApiOrderDetailResponse$OpenApiRecipientResponse": {
         "required": [
@@ -988,7 +989,7 @@
             "format": "int32"
           }
         },
-        "description": "收件人"
+        "description": "收件人响应"
       },
       "CLPRO_OpenApiOrderResponse": {
         "type": "object",
@@ -1022,7 +1023,7 @@
             "$ref": "#/components/schemas/CLPRO_OpenApiOrderDetailResponse"
           }
         },
-        "description": "下单response"
+        "description": "开放接口下单响应"
       },
       "CLPRO_OpenApiOrderDetailRequest": {
         "required": [
@@ -1044,7 +1045,7 @@
             "format": "int32"
           }
         },
-        "description": "订单详情Request"
+        "description": "订单详情请求"
       },
       "CLCMRLPRO_OpenApiOrderDetailResponse": {
         "type": "object",
@@ -1122,7 +1123,7 @@
             "$ref": "#/components/schemas/CLPRO_OpenApiDocumentOptionRequest"
           }
         },
-        "description": "下单Request"
+        "description": "开放接口按试算结果下单请求"
       },
       "CLPRO_OpenApiOrderByCalPriceRequest$OpenApiSenderRequest": {
         "type": "object",
@@ -1193,7 +1194,7 @@
             "format": "int32"
           }
         },
-        "description": "寄件人"
+        "description": "发件人请求"
       },
       "CLPRO_OpenApiCancelRequest": {
         "required": [
@@ -1211,7 +1212,8 @@
             "type": "string",
             "description": "客户单号"
           }
-        }
+        },
+        "description": "开放接口取消订单请求"
       },
       "CLCM_Result": {
         "type": "object",
@@ -1259,7 +1261,7 @@
             "$ref": "#/components/schemas/CLPRO_OpenApiRecipientRequest"
           }
         },
-        "description": "运费试算Request"
+        "description": "运费试算请求"
       },
       "CLPRO_OpenApiCalPriceRequest$OpenApiWaybillInfoRequest": {
         "type": "object",
@@ -1290,7 +1292,7 @@
             "format": "int32"
           }
         },
-        "description": "运单信息"
+        "description": "运单信息请求"
       },
       "CLCM_TypeRemark": {
         "type": "object",
@@ -1366,7 +1368,7 @@
             "$ref": "#/components/schemas/CLCMRLPRO_OpenApiQueryPriceResponse"
           }
         },
-        "description": "运费试算Response"
+        "description": "运费试算响应"
       },
       "CLPRO_OpenApiQueryPriceResponse": {
         "type": "object",
@@ -1465,7 +1467,7 @@
             "description": "运费单价(RMB/KG)"
           }
         },
-        "description": "查价Response"
+        "description": "查价响应"
       },
       "CLPRO_OpenApiQueryPriceResponse$CalFeeModel": {
         "type": "object",
@@ -1511,7 +1513,7 @@
             "description": "折扣"
           }
         },
-        "description": "费用明细"
+        "description": "费用"
       }
     }
   },

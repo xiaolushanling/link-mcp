@@ -2,6 +2,7 @@
 
 import os
 from collections.abc import Mapping
+from typing import Literal
 from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
@@ -13,6 +14,7 @@ class Settings(BaseModel):
     api_base_url: str = "https://demo.linkl.com.cn/api"
     token: SecretStr = SecretStr("")
     customer_key: SecretStr = SecretStr("")
+    profile: Literal["full", "customer"] = "full"
     timeout_seconds: float = Field(default=30, ge=0.1, le=300)
     services: tuple[str, ...] = ()
     read_only: bool = False
@@ -52,6 +54,7 @@ class Settings(BaseModel):
             "api_base_url": "LINK_API_BASE_URL",
             "token": "LINK_TOKEN",
             "customer_key": "LINK_CUSTOMER_KEY",
+            "profile": "LINK_PROFILE",
             "timeout_seconds": "LINK_TIMEOUT_SECONDS",
             "read_only": "LINK_READ_ONLY",
             "max_response_bytes": "LINK_MAX_RESPONSE_BYTES",

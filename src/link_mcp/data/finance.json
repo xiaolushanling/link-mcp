@@ -190,7 +190,7 @@
             "format": "int32"
           }
         },
-        "description": "查价Request"
+        "description": "查价请求"
       },
       "CLFRO_OpenApiQueryPriceRequest$OpenApiQueryPricePieceRequest": {
         "type": "object",
@@ -212,7 +212,7 @@
             "description": "高"
           }
         },
-        "description": "单件信息"
+        "description": "单件信息请求"
       },
       "CLCM_TypeRemark": {
         "type": "object",
@@ -343,7 +343,7 @@
             "description": "运费单价(RMB/KG)"
           }
         },
-        "description": "查价Response"
+        "description": "查价响应"
       },
       "CLFRO_OpenApiQueryPriceResponse$CalFeeModel": {
         "type": "object",
@@ -389,7 +389,7 @@
             "description": "折扣"
           }
         },
-        "description": "费用明细"
+        "description": "费用"
       },
       "CLFRO_OpenApiAvailableProductRequest": {
         "required": [
@@ -407,7 +407,7 @@
             "description": "业务系统代码(LMS:国际物流(默认) PDS:尾程制单 OWMS:海外仓)"
           }
         },
-        "description": "查询可用产品Model"
+        "description": "查询可用产品请求"
       },
       "CLCMRULLFRO_OpenApiAvailableProductResponse": {
         "type": "object",
@@ -447,7 +447,7 @@
             "description": "类别"
           }
         },
-        "description": "查询可用产品Response"
+        "description": "查询可用产品响应"
       },
       "CLFRO_OpenApiBalanceRequest": {
         "required": [
@@ -460,7 +460,7 @@
             "description": "customerKey，请联系客服提供，保密使用"
           }
         },
-        "description": "客户余额Request"
+        "description": "客户余额请求"
       },
       "CLCMRLFRO_OpenApiBalanceResponse": {
         "type": "object",
@@ -524,7 +524,7 @@
             "description": "未付款账单"
           }
         },
-        "description": "客户余额Response"
+        "description": "客户余额响应"
       }
     }
   },

@@ -15,6 +15,7 @@ from jsonschema.exceptions import SchemaError
 
 from .catalog import Catalog
 from .config import Settings
+from .document_safety import scrub_credential_examples
 
 
 def document_url(api_base_url: str, value: str) -> str:
@@ -80,7 +81,7 @@ async def sync_documents(api_base_url: str, data_dir: Path) -> Catalog:
                 url = document_url(api_base_url, service["url"])
                 response = await client.get(url)
                 response.raise_for_status()
-                document = response.json()
+                document = scrub_credential_examples(response.json())
                 if not str(document.get("openapi", "")).startswith("3."):
                     raise ValueError("需要 OpenAPI 3.x 文档")
                 if not document.get("paths"):
