@@ -27,7 +27,7 @@ Skill 源码、打包脚本、客户指南和下载文件统一由独立 [link-s
 
 ## 通过 Git 使用
 
-与 [UPS MCP](https://github.com/UPS-API/ups-mcp) 的分发方式一致，客户端可通过 `uvx` 从 Git 仓库安装并启动。
+客户端可通过 `uvx` 从 Git 仓库安装并启动。
 需要 Git、Python 3.11+ 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。
 安装 uv 后，确认 MCP 客户端启动进程能找到 `uvx`（必要时重启客户端）：
 
@@ -208,17 +208,17 @@ stdio 启动后等待 MCP 客户端通信，终端没有欢迎消息属于正常
 
 ## 可选配置
 
-| 环境变量 | 默认值 | 含义 |
-| --- | --- | --- |
-| `LINK_API_BASE_URL` | `https://demo.linkl.com.cn/api` | 网关根地址，包含 `/api`，不含服务路径 |
-| `LINK_TOKEN` | 空 | 上游 `linkToken`，业务调用时检查 |
-| `LINK_CUSTOMER_KEY` | 空 | 可选客户凭证补入 |
-| `LINK_PROFILE` | `full` | `customer` 固定使用配置的客户身份，仅开放客户业务白名单；业务调用需配置客户密钥 |
-| `LINK_SERVICES` | 空 | 逗号分隔的服务代码，空值启用全部 |
-| `LINK_READ_ONLY` | `false` | `true` 时仅暴露 11 个查询业务工具和 3 个文档工具 |
-| `LINK_TIMEOUT_SECONDS` | `30` | 请求超时秒数 |
-| `LINK_MAX_RESPONSE_BYTES` | `20971520` | 上游响应最大字节数 |
-| `LINK_MAX_RESPONSE_CHARACTERS` | `25000` | 返回给模型的最大字符数 |
+| 环境变量 | 默认值            | 含义 |
+| --- |----------------| --- |
+| `LINK_API_BASE_URL` | `{origin}/api` | 网关根地址，包含 `/api`，不含服务路径 |
+| `LINK_TOKEN` | 空              | 上游 `linkToken`，业务调用时检查 |
+| `LINK_CUSTOMER_KEY` | 空              | 可选客户凭证补入 |
+| `LINK_PROFILE` | `full`         | `customer` 固定使用配置的客户身份，仅开放客户业务白名单；业务调用需配置客户密钥 |
+| `LINK_SERVICES` | 空              | 逗号分隔的服务代码，空值启用全部 |
+| `LINK_READ_ONLY` | `false`        | `true` 时仅暴露 11 个查询业务工具和 3 个文档工具 |
+| `LINK_TIMEOUT_SECONDS` | `30`           | 请求超时秒数 |
+| `LINK_MAX_RESPONSE_BYTES` | `20971520`     | 上游响应最大字节数 |
+| `LINK_MAX_RESPONSE_CHARACTERS` | `25000`        | 返回给模型的最大字符数 |
 
 上游 OpenAPI 的 `servers` 指向其他站点；本服务按网页实际调试逻辑使用
 `LINK_API_BASE_URL + contextPath + path`，不会自动切换到生产环境。
